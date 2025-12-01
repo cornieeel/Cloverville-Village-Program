@@ -1,0 +1,114 @@
+/* === Sidebar === */
+.sidebar {
+  -fx-background-color: #003D0D;
+}
+.sidebar-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: #D8DAD3;
+  -fx-pref-width: 112;
+  -fx-pref-height: 20;
+  -fx-padding: 3 3 3 3;
+}
+.sidebar-button-active {
+  -fx-background-color: #00340B;
+  -fx-text-fill: #D8DAD3;
+  -fx-pref-width: 112;
+  -fx-pref-height: 20;
+  -fx-padding: 3 3 3 3;
+}
+
+/* === TabPane: remove all spacing, borders, shadows === */
+.tab-pane {
+  -fx-padding: 0;
+
+}
+
+.tab-pane > .tab-header-area {
+  -fx-padding: 0;
+  -fx-background-color: transparent;
+  -fx-effect: null;
+  -fx-border-color: transparent;
+}
+
+.tab-pane > .tab-header-area > .headers-region {
+  -fx-padding: 0;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+  -fx-background-color: transparent;
+  -fx-effect: null;
+  -fx-border-color: transparent;
+}
+
+.tab-pane > .tab-content-area {
+  -fx-padding: 0;
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+}
+
+/* Tabs themselves */
+.tab-pane .tab {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+  -fx-background-radius: 0;
+  -fx-padding: 0;
+  -fx-pref-width: 120px;
+
+
+}
+
+/* Selected tab */
+.tab-pane .tab:selected {
+  -fx-background-color: #EBEBEB;
+  -fx-border-color: transparent;
+  -fx-background-radius: 0;
+}
+
+/* Tab labels */
+.tab-pane .tab .tab-label {
+  -fx-text-fill: #616161;
+  -fx-font-size: 13px;
+  -fx-alignment: CENTER;
+  -fx-text-alignment: center;
+}
+
+/* === Tab content background === */
+.tab-content {
+  -fx-background-color: #EBEBEB;
+}
+
+/* === Labels === */
+.form-label {
+  -fx-text-fill: #616161;
+  -fx-font-size: 12px;
+}
+.title-label {
+  -fx-text-fill: #525252;
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+}
+
+/* === Inputs === */
+.text-field, .date-picker {
+  -fx-background-color: white;
+  -fx-background-radius: 4;
+  -fx-border-radius: 4;
+  -fx-border-color: #CCCCCC;
+}
+
+/* === Buttons === */
+.button-green {
+  -fx-background-color: #00C130;
+  -fx-text-fill: white;
+  -fx-background-radius: 10;
+}
+.button-gray {
+  -fx-background-color: #B2B2B2;
+  -fx-text-fill: white;
+  -fx-background-radius: 10;
+}
+.button-gray-small {
+  -fx-background-color: #B2B2B2;
+  -fx-text-fill: white;
+  -fx-font-size: 7px;
+}
