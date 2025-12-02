@@ -24,7 +24,7 @@
 
     <!-- External stylesheet -->
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@../style.css" />
     </stylesheets>
 
     <children>
@@ -34,7 +34,7 @@
             <children>
                 <ImageView fitHeight="58.0" fitWidth="58.0" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../../../../Downloads/ClovervilleLogo.png" />
+                        <Image url="@../../../../../../../../../Downloads/ClovervilleLogo.png" />
                     </image>
                     <VBox.margin>
                         <Insets bottom="30.0" top="17.0" />
@@ -119,12 +119,35 @@
                     <content>
                         <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
                      <children>
-                        <TableView layoutX="12.0" layoutY="81.0" prefHeight="200.0" prefWidth="410.0">
+                        <TableView layoutX="10.0" layoutY="54.0" prefHeight="259.0" prefWidth="481.0" style="-fx-background-color: transparent;">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn prefWidth="98.78173828125" text="Number" />
+                            <TableColumn minWidth="0.0" prefWidth="99.04022216796875" text="Full name" />
+                              <TableColumn minWidth="0.0" prefWidth="83.95980834960938" text="Age" />
+                              <TableColumn prefWidth="91.35464477539062" text="Gender" />
+                              <TableColumn prefWidth="107.50479125976562" text="Citizen ID" />
                           </columns>
                         </TableView>
+                        <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" style="-fx-background-radius: 0; -fx-background-color: #00C130;" text="Export" textFill="WHITE">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="137.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #B2B2B2;" text="Edit user" textFill="WHITE">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="250.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #FF5656;" text="Delete user" textFill="WHITE">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
                      </children></AnchorPane>
                     </content>
                 </Tab>

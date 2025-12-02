@@ -112,3 +112,22 @@
   -fx-text-fill: white;
   -fx-font-size: 7px;
 }
+.table-view .column-header-background {
+  -fx-background-color: transparent; /* or a solid color */
+  -fx-border-color: transparent;
+  -fx-padding: 0;
+}
+
+.table-view .column-header {
+  -fx-background-color: #A5A5A5; /* light gray */
+  -fx-border-color: #d0d0d0;
+  -fx-border-width: 0; /* bottom border only */
+  -fx-padding: 8 12 8 12;
+  -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .label {
+  -fx-font-size: 11px;
+  -fx-font-weight: 100;
+  -fx-text-fill: #616161;
+}
