@@ -1,14 +1,40 @@
 package org.example.clovervilleprogram;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
-public class HelloController
+import java.io.IOException;
+
+public class MainController
 {
-  @FXML private Label welcomeText;
+  @FXML private AnchorPane contentPane;
 
-  @FXML protected void onHelloButtonClick()
-  {
-    welcomeText.setText("Welcome to JavaFX Application!");
+
+  @FXML private void showUserPage(){
+    loadContent("UserRegister/UserRegister.fxml");
+  }
+  @FXML private void showPointsPage(){
+    loadContent("PointsPage/PointsPage.fxml");
+  }
+  @FXML private void showTasksPage(){
+    loadContent("TasksPage/IndividualTasks.fxml");
+  }
+
+  private void loadContent(String fxmlFile){
+      try
+      {
+        Parent pane = FXMLLoader.load(getClass().getResource(fxmlFile));
+        contentPane.getChildren().setAll(pane);
+
+        AnchorPane.setTopAnchor(pane, 0.0);
+        AnchorPane.setBottomAnchor(pane, 0.0);
+        AnchorPane.setLeftAnchor(pane, 0.0);
+        AnchorPane.setRightAnchor(pane, 0.0);
+      } catch (IOException e){
+        e.printStackTrace();
+      }
   }
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="276.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER_NAME">
+<AnchorPane prefHeight="276.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clovervilleprogram.EditUserController">
     <children>
         <Label layoutX="37.0" layoutY="33.0" text="Edit an User">
             <font>
@@ -51,18 +51,18 @@
                         <Insets right="15.0" />
                     </padding>
                 </Label>
-                <TextField prefWidth="115.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
+                <TextField  prefWidth="115.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
                 <TextField style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="citizenID" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <DatePicker prefHeight="26.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
-        <Button layoutX="353.0" layoutY="172.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #B2B2B2; -fx-background-radius: 0;" text="Randomize" textFill="WHITE">
+        <Button onAction="#handleRandomizeButton" layoutX="353.0" layoutY="172.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #B2B2B2; -fx-background-radius: 0;" text="Randomize" textFill="WHITE">
             <font>
                 <Font size="7.0" />
             </font>
         </Button>
-        <Button layoutX="150.0" layoutY="221.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
-        <Button layoutX="248.0" layoutY="221.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+        <Button onAction="#handleSaveButton" fx:id="saveButton" layoutX="150.0" layoutY="221.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+        <Button onAction="#handleCancelButton" fx:id="cancelButton" layoutX="248.0" layoutY="221.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
     </children>
 </AnchorPane>

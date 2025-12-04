@@ -9,186 +9,154 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="416.0" prefWidth="663.0" style="-fx-background-color: #D9D9D9;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<!-- TabPane -->
 
-    <!-- External stylesheet -->
+<TabPane prefHeight="382.0" prefWidth="500.0" styleClass="clear-tabs" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@../style.css" />
     </stylesheets>
+      <tabs>
+          <!-- Register User Tab -->
+          <Tab styleClass="register-tab" text="Green Activities">
+              <content>
+                  <AnchorPane prefHeight="351.0" prefWidth="440.0" styleClass="tab-content">
+                      <children>
+                          <Label layoutX="26.0" layoutY="19.0" styleClass="title-label" text="Add points for a green activity" />
 
-    <children>
+                          <GridPane layoutX="62.0" layoutY="82.0" prefHeight="129.0" prefWidth="309.0">
+                              <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" prefWidth="93.0" />
+                                  <ColumnConstraints prefWidth="216.0" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                  <RowConstraints prefHeight="35.0" />
+                                  <RowConstraints prefHeight="35.0" />
+                                  <RowConstraints prefHeight="35.0" />
+                                  <RowConstraints prefHeight="35.0" />
+                              </rowConstraints>
+                              <children>
+                                  <Label styleClass="form-label" text="Citizen ID:">
+                                      <GridPane.margin>
+                                          <Insets right="10.0" />
+                                      </GridPane.margin>
+                        </Label>
+                                  <TextField prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" />
 
-        <!-- Sidebar -->
-        <VBox alignment="TOP_CENTER" styleClass="sidebar">
-            <children>
-                <ImageView fitHeight="58.0" fitWidth="58.0" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../../../../../../Downloads/ClovervilleLogo.png" />
-                    </image>
-                    <VBox.margin>
-                        <Insets bottom="30.0" top="17.0" />
-                    </VBox.margin>
-                </ImageView>
+                                  <Label styleClass="form-label" text="Activity:" GridPane.rowIndex="1">
+                                      <GridPane.margin>
+                                          <Insets right="10.0" />
+                                      </GridPane.margin>
+                        </Label>
 
-                <VBox alignment="TOP_CENTER" prefHeight="213.0" prefWidth="134.0">
-                    <children>
-                        <Button prefHeight="23.0" prefWidth="152.0" styleClass="sidebar-button" text="Users" />
-                        <Button styleClass="sidebar-button-active" text="Points" />
-                        <Button styleClass="sidebar-button" text="Tasks" />
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
+                                  <Label styleClass="form-label" text="Points:" GridPane.rowIndex="2">
+                                      <GridPane.margin>
+                                          <Insets right="10.0" />
+                                      </GridPane.margin>
+                        </Label>
+                                  <TextField prefHeight="29.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <!-- TabPane -->
-        <TabPane prefHeight="382.0" prefWidth="500.0" styleClass="clear-tabs" tabClosingPolicy="UNAVAILABLE">
+                                  <Label styleClass="form-label" text="Date of Activity:" GridPane.rowIndex="3">
+                                      <GridPane.margin>
+                                          <Insets right="10.0" />
+                                      </GridPane.margin>
+                        </Label>
+                                  <TextField prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField layoutX="103.0" layoutY="11.0" prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              </children>
+                          </GridPane>
 
-            <tabs>
-                <!-- Register User Tab -->
-                <Tab styleClass="register-tab" text="Green Activities">
-                    <content>
-                        <AnchorPane prefHeight="351.0" prefWidth="440.0" styleClass="tab-content">
-                            <children>
-                                <Label layoutX="26.0" layoutY="19.0" styleClass="title-label" text="Add points for a green activity" />
-
-                                <GridPane layoutX="62.0" layoutY="82.0" prefHeight="129.0" prefWidth="309.0">
-                                    <columnConstraints>
-                                        <ColumnConstraints halignment="RIGHT" prefWidth="93.0" />
-                                        <ColumnConstraints prefWidth="216.0" />
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints prefHeight="35.0" />
-                                        <RowConstraints prefHeight="35.0" />
-                                        <RowConstraints prefHeight="35.0" />
-                                        <RowConstraints prefHeight="35.0" />
-                                    </rowConstraints>
-                                    <children>
-                                        <Label styleClass="form-label" text="Citizen ID:">
-                                            <GridPane.margin>
-                                                <Insets right="10.0" />
-                                            </GridPane.margin></Label>
-                                        <TextField prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" />
-
-                                        <Label styleClass="form-label" text="Activity:" GridPane.rowIndex="1">
-                                            <GridPane.margin>
-                                                <Insets right="10.0" />
-                                            </GridPane.margin></Label>
-
-                                        <Label styleClass="form-label" text="Points:" GridPane.rowIndex="2">
-                                            <GridPane.margin>
-                                                <Insets right="10.0" />
-                                            </GridPane.margin></Label>
-                                        <TextField prefHeight="29.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                                        <Label styleClass="form-label" text="Date of Activity:" GridPane.rowIndex="3">
-                                            <GridPane.margin>
-                                                <Insets right="10.0" />
-                                            </GridPane.margin></Label>
-                                        <TextField prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField layoutX="103.0" layoutY="11.0" prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    </children>
-                                </GridPane>
-
-                                <Button layoutX="169.0" layoutY="218.0" prefHeight="30.0" prefWidth="94.0" styleClass="button-green" text="Add Points">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font></Button>
-                                <Button layoutX="265.0" layoutY="218.0" prefHeight="30.0" prefWidth="94.0" styleClass="button-gray" text="Reset fields">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font></Button>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-
-                <!-- People Directory Tab -->
-                <Tab styleClass="register-tab" text="Green Points">
-                    <content>
-                        <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
-                            <children>
-                                <TableView layoutX="10.0" layoutY="54.0" prefHeight="259.0" prefWidth="481.0" style="-fx-background-color: transparent;">
-                                    <columns>
-                                        <TableColumn prefWidth="98.78173828125" text="Number" />
-                                        <TableColumn minWidth="0.0" prefWidth="99.04022216796875" text="Resident ID" />
-                                        <TableColumn minWidth="0.0" prefWidth="150.69668579101562" text="Green Activity" />
-                                        <TableColumn prefWidth="131.3033447265625" text="Points per activity" />
-                                    </columns>
-                                </TableView>
-                                <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
-                                    <font>
-                                        <Font size="12.0" />
-                                    </font>
-                                </TextField>
-                                <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" style="-fx-background-radius: 0; -fx-background-color: #00C130;" text="Export" textFill="WHITE">
-                                    <font>
-                                        <Font size="12.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="137.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #B2B2B2;" text="Edit activity" textFill="WHITE">
-                                    <font>
-                                        <Font size="12.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="250.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #FF5656;" text="Delete activity" textFill="WHITE">
-                                    <font>
-                                        <Font size="12.0" />
-                                    </font>
-                                </Button>
-                            </children></AnchorPane>
-                    </content>
-                </Tab>
-            <Tab styleClass="register-tab" text="Available Green Activities">
-               <content>
-                  <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
-                     <children>
-                        <TableView layoutX="10.0" layoutY="54.0" prefHeight="236.0" prefWidth="481.0" style="-fx-background-color: transparent;">
-                           <columns>
-                              <TableColumn prefWidth="98.78173828125" text="Number" />
-                              <TableColumn minWidth="0.0" prefWidth="244.85470581054688" text="Green Activity:" />
-                              <TableColumn prefWidth="136.145263671875" text="Points per Activity" />
-                           </columns>
-                        </TableView>
-                        <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </TextField>
-                        <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" style="-fx-background-radius: 0; -fx-background-color: #00C130;" text="Export" textFill="WHITE">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="112.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #00C130;" text="Add Green Activity" textFill="WHITE">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="246.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #FF5656;" text="Delete activity" textFill="WHITE">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
+                          <Button layoutX="169.0" layoutY="218.0" prefHeight="30.0" prefWidth="94.0" styleClass="button-green" text="Add Points">
+                              <font>
+                                  <Font size="10.0" />
+                              </font>
+                  </Button>
+                          <Button layoutX="265.0" layoutY="218.0" prefHeight="30.0" prefWidth="94.0" styleClass="button-gray" text="Reset fields">
+                              <font>
+                                  <Font size="10.0" />
+                              </font>
+                  </Button>
+                      </children>
                   </AnchorPane>
-               </content>
-            </Tab>
-            </tabs>
+              </content>
+          </Tab>
 
-            <HBox.margin>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-            </HBox.margin>
-        </TabPane>
-
-    </children>
-</HBox>
+          <!-- People Directory Tab -->
+          <Tab styleClass="register-tab" text="Green Points">
+              <content>
+                  <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
+                      <children>
+                          <TableView layoutX="10.0" layoutY="54.0" prefHeight="259.0" prefWidth="481.0" style="-fx-background-color: transparent;">
+                              <columns>
+                                  <TableColumn prefWidth="98.78173828125" text="Number" />
+                                  <TableColumn minWidth="0.0" prefWidth="99.04022216796875" text="Resident ID" />
+                                  <TableColumn minWidth="0.0" prefWidth="150.69668579101562" text="Green Activity" />
+                                  <TableColumn prefWidth="131.3033447265625" text="Points per activity" />
+                              </columns>
+                          </TableView>
+                          <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
+                              <font>
+                                  <Font size="12.0" />
+                              </font>
+                          </TextField>
+                          <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" style="-fx-background-radius: 0; -fx-background-color: #00C130;" text="Export" textFill="WHITE">
+                              <font>
+                                  <Font size="12.0" />
+                              </font>
+                          </Button>
+                          <Button layoutX="137.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #B2B2B2;" text="Edit activity" textFill="WHITE">
+                              <font>
+                                  <Font size="12.0" />
+                              </font>
+                          </Button>
+                          <Button layoutX="250.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #FF5656;" text="Delete activity" textFill="WHITE">
+                              <font>
+                                  <Font size="12.0" />
+                              </font>
+                          </Button>
+                      </children>
+            </AnchorPane>
+              </content>
+          </Tab>
+      <Tab styleClass="register-tab" text="Available Green Activities">
+         <content>
+            <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
+               <children>
+                  <TableView layoutX="10.0" layoutY="54.0" prefHeight="236.0" prefWidth="481.0" style="-fx-background-color: transparent;">
+                     <columns>
+                        <TableColumn prefWidth="98.78173828125" text="Number" />
+                        <TableColumn minWidth="0.0" prefWidth="244.85470581054688" text="Green Activity:" />
+                        <TableColumn prefWidth="136.145263671875" text="Points per Activity" />
+                     </columns>
+                  </TableView>
+                  <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" style="-fx-background-radius: 0; -fx-background-color: #00C130;" text="Export" textFill="WHITE">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="112.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #00C130;" text="Add Green Activity" textFill="WHITE">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="246.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #FF5656;" text="Delete activity" textFill="WHITE">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      </tabs>
+  </TabPane>
