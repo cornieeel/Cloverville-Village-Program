@@ -51,10 +51,10 @@
                         <Insets right="15.0" />
                     </padding>
                 </Label>
-                <TextField  prefWidth="115.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
-                <TextField style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="citizenID" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <DatePicker prefHeight="26.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="editFullName"  prefWidth="115.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
+                <TextField fx:id="editGender" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="editCitizenID" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <DatePicker fx:id="editAge" prefHeight="26.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
         <Button onAction="#handleRandomizeButton" layoutX="353.0" layoutY="172.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #B2B2B2; -fx-background-radius: 0;" text="Randomize" textFill="WHITE">
