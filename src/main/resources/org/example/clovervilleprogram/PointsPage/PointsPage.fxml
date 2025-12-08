@@ -17,7 +17,7 @@
 
 <!-- TabPane -->
 
-<TabPane prefHeight="382.0" prefWidth="500.0" styleClass="clear-tabs" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane prefHeight="382.0" prefWidth="500.0" styleClass="clear-tabs" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clovervilleprogram.AddPointsController">
     <stylesheets>
         <URL value="@../style.css" />
     </stylesheets>
@@ -144,7 +144,7 @@
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="112.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #00C130;" text="Add Green Activity" textFill="WHITE">
+                  <Button onAction="#handleAddButton" layoutX="112.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: #00C130;" text="Add Green Activity" textFill="WHITE">
                      <font>
                         <Font size="12.0" />
                      </font>
