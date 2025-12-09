@@ -1,7 +1,82 @@
-[ {
-  "activity" : "ds",
-  "pointsPerActivity" : "ds"
-}, {
-  "activity" : "ds",
-  "pointsPerActivity" : "ds"
-} ]
+[
+  {
+    "activity": "Cycling to work for a week",
+    "pointsPerActivity": 80
+  },
+  {
+    "activity": "Eating vegan for a week",
+    "pointsPerActivity": 70
+  },
+  {
+    "activity": "Stopped smoking cigarettes for a week",
+    "pointsPerActivity": 90
+  },
+  {
+    "activity": "Using public transport instead of car for a week",
+    "pointsPerActivity": 60
+  },
+  {
+    "activity": "Planting a tree",
+    "pointsPerActivity": 100
+  },
+  {
+    "activity": "Bringing your own reusable bag when shopping",
+    "pointsPerActivity": 15
+  },
+  {
+    "activity": "Using a reusable water bottle instead of plastic",
+    "pointsPerActivity": 20
+  },
+  {
+    "activity": "Recycling paper, plastic and glass for a week",
+    "pointsPerActivity": 40
+  },
+  {
+    "activity": "Turning off lights when leaving a room for a day",
+    "pointsPerActivity": 10
+  },
+  {
+    "activity": "Air-drying clothes instead of using a dryer",
+    "pointsPerActivity": 25
+  },
+  {
+    "activity": "Buying local food products",
+    "pointsPerActivity": 30
+  },
+  {
+    "activity": "Avoiding single-use coffee cups for a week",
+    "pointsPerActivity": 35
+  },
+  {
+    "activity": "Taking a shorter shower (under 5 minutes)",
+    "pointsPerActivity": 15
+  },
+  {
+    "activity": "Participating in a community clean-up event",
+    "pointsPerActivity": 80
+  },
+  {
+    "activity": "Using energy-efficient bulbs at home",
+    "pointsPerActivity": 50
+  },
+  {
+    "activity": "Working from home instead of commuting (per day)",
+    "pointsPerActivity": 25
+  },
+  {
+    "activity": "Not wasting food for a week",
+    "pointsPerActivity": 60
+  },
+  {
+    "activity": "Repairing an item instead of buying a new one",
+    "pointsPerActivity": 45
+  },
+  {
+    "activity": "Using a reusable lunchbox instead of plastic wrap",
+    "pointsPerActivity": 20
+  },
+  {
+    "activity": "Collecting and properly disposing of e-waste",
+    "pointsPerActivity": 70
+  }
+]

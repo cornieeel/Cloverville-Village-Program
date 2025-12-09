@@ -2,10 +2,50 @@
   "fullName" : "cornel",
   "age" : "2025-12-10",
   "gender" : "m",
-  "citizenId" : "75731011"
+  "citizenId" : "49920369"
 }, {
-  "fullName" : "Cornel Negru",
-  "age" : "2025-12-17",
-  "gender" : "M",
-  "citizenId" : "78227212"
+  "fullName" : "Adam",
+  "age" : "1998-12-02",
+  "gender" : "male",
+  "citizenId" : "88018459"
+}, {
+  "fullName" : "Kristina Povazska",
+  "age" : "2000-12-10",
+  "gender" : "female",
+  "citizenId" : "11420110"
+}, {
+  "fullName" : "Daniela Smith",
+  "age" : "2001-12-25",
+  "gender" : "female",
+  "citizenId" : "53414847"
+}, {
+  "fullName" : "Alexa Meckenzie",
+  "age" : "0204-12-17",
+  "gender" : "female",
+  "citizenId" : "23129312"
+}, {
+  "fullName" : "Hunor Kovacik",
+  "age" : "2006-12-21",
+  "gender" : "male",
+  "citizenId" : "53064038"
+}, {
+  "fullName" : "Connor Mcgregor",
+  "age" : "1960-12-12",
+  "gender" : "male",
+  "citizenId" : "82042507"
+}, {
+  "fullName" : "Khabib",
+  "age" : "2000-12-13",
+  "gender" : "male",
+  "citizenId" : "67508805"
+}, {
+  "fullName" : "David",
+  "age" : "1998-12-11",
+  "gender" : "male",
+  "citizenId" : "42819298"
+}, {
+  "fullName" : "Taylor Swift",
+  "age" : "1999-12-12",
+  "gender" : "female",
+  "citizenId" : "63574316"
 } ]
