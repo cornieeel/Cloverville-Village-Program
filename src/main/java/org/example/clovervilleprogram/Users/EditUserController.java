@@ -1,4 +1,4 @@
-package org.example.clovervilleprogram;
+package org.example.clovervilleprogram.Users;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

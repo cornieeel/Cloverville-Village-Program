@@ -1,4 +1,4 @@
-package org.example.clovervilleprogram;
+package org.example.clovervilleprogram.Users;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

@@ -1,4 +1,4 @@
-package org.example.clovervilleprogram;
+package org.example.clovervilleprogram.Users;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -109,7 +109,7 @@ public class UserController {
     }
 
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserRegister/EditUser.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/UserRegister/EditUser.fxml"));
       Parent root = fxmlLoader.load();
 
       EditUserController controller = fxmlLoader.getController();

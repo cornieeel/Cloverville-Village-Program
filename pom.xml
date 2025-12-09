@@ -78,7 +78,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.example.clovervilleprogram/org.example.clovervilleprogram.HelloApplication
+                                org.example.clovervilleprogram/org.example.clovervilleprogram.App.ClovervilleApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

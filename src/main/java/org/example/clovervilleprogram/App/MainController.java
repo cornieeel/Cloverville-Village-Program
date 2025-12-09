@@ -1,9 +1,8 @@
-package org.example.clovervilleprogram;
+package org.example.clovervilleprogram.App;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -13,14 +12,19 @@ public class MainController
   @FXML private AnchorPane contentPane;
 
 
-  @FXML private void showUserPage(){
-    loadContent("UserRegister/UserRegister.fxml");
+  @FXML
+  private void showUserPage() {
+    loadContent("/org/example/clovervilleprogram/UserRegister/UserRegister.fxml");
   }
-  @FXML private void showPointsPage(){
-    loadContent("PointsPage/PointsPage.fxml");
+
+  @FXML
+  private void showPointsPage() {
+    loadContent("/org/example/clovervilleprogram/PointsPage/PointsPage.fxml");
   }
-  @FXML private void showTasksPage(){
-    loadContent("TasksPage/IndividualTasks.fxml");
+
+  @FXML
+  private void showTasksPage() {
+    loadContent("/org/example/clovervilleprogram/TasksPage/IndividualTasks.fxml");
   }
 
   private void loadContent(String fxmlFile){
