@@ -10,4 +10,6 @@ module org.example.clovervilleprogram {
   opens org.example.clovervilleprogram.Points to javafx.fxml;
   exports org.example.clovervilleprogram.App;
   opens org.example.clovervilleprogram.App to javafx.fxml;
+  exports org.example.clovervilleprogram.IndividualTasks;
+  opens org.example.clovervilleprogram.IndividualTasks to javafx.fxml;
 }

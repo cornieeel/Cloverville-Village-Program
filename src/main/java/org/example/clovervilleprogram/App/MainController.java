@@ -3,6 +3,7 @@ package org.example.clovervilleprogram.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -10,6 +11,10 @@ import java.io.IOException;
 public class MainController
 {
   @FXML private AnchorPane contentPane;
+  @FXML private Button showUserPage;
+  @FXML private Button showPointsPage;
+  @FXML private Button showTasksPage;
+
 
 
   @FXML
@@ -20,6 +25,7 @@ public class MainController
   @FXML
   private void showPointsPage() {
     loadContent("/org/example/clovervilleprogram/PointsPage/PointsPage.fxml");
+
   }
 
   @FXML

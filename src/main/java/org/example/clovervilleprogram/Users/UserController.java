@@ -30,6 +30,7 @@ public class UserController {
   @FXML private TableColumn<User, String> ageTable;
   @FXML private TableColumn<User, String> genderTable;
   @FXML private TableColumn<User, String> citizenIdTable;
+  @FXML private TableColumn<User, Number> numberOfPeople;
 
   private final File jsonFile = new File("users.json");
   private final ObservableList<User> userList = FXCollections.observableArrayList();
@@ -41,6 +42,18 @@ public class UserController {
     ageTable.setCellValueFactory(data -> data.getValue().ageProperty());
     genderTable.setCellValueFactory(data -> data.getValue().genderProperty());
     citizenIdTable.setCellValueFactory(data -> data.getValue().citizenIdProperty());
+    numberOfPeople.setCellFactory(col -> new TableCell<>(){
+      @Override
+      protected void updateItem(Number item, boolean empty) {
+        super.updateItem(item, empty);
+
+        if (empty) {
+          setText(null);
+        } else {
+          setText(String.valueOf(getIndex() + 1));
+        }
+      }
+    });
 
     loadUsersFromJson();
 

@@ -21,8 +21,11 @@ public class ActivityCreateController {
 
   @FXML
   private void handleSaveButton() {
-    pointsController.addActivity(new Activity(activityName.getText(), pointsPerActivity.getText()));
+    Activity activity = new Activity();
+    activity.setActivity(activityName.getText());
+    activity.setPointsPerActivity(pointsPerActivity.getText());
 
+    pointsController.addActivity(activity);
 
 
     Stage stage = (Stage) activityName.getScene().getWindow();

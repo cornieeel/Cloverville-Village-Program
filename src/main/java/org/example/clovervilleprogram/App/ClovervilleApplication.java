@@ -16,7 +16,7 @@ public class ClovervilleApplication extends Application {
 
 
 
-    stage.setTitle("Hello!");
+    stage.setTitle("CloverVille App!");
     stage.setScene(scene);
     stage.show();
   }

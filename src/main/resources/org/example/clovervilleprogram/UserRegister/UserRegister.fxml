@@ -94,7 +94,7 @@
                <children>
                   <TableView fx:id="userTable" layoutX="10.0" layoutY="54.0" prefHeight="259.0" prefWidth="481.0" style="-fx-background-color: transparent;">
                     <columns>
-                      <TableColumn prefWidth="98.78173828125" text="Number" />
+                      <TableColumn fx:id="numberOfPeople" prefWidth="98.78173828125" text="Number" />
                       <TableColumn fx:id="fullNameTable" minWidth="0.0" prefWidth="99.04022216796875" text="Full name" />
                         <TableColumn fx:id="ageTable" minWidth="0.0" prefWidth="83.95980834960938" text="Age" />
                         <TableColumn fx:id="genderTable" prefWidth="91.35464477539062" text="Gender" />
