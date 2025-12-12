@@ -21,22 +21,22 @@ public class Activity {
     this.date = new SimpleStringProperty(date);
   }
 
-  // ===== Resident ID =====
+
   public String getResidentId() { return residentId.get(); }
   public void setResidentId(String residentId) { this.residentId.set(residentId); }
   public StringProperty residentIdProperty() { return residentId; }
 
-  // ===== Activity =====
+
   public String getActivity() { return activity.get(); }
   public void setActivity(String activity) { this.activity.set(activity); }
   public StringProperty activityProperty() { return activity; }
 
-  // ===== Points =====
+
   public String getPointsPerActivity() { return pointsPerActivity.get(); }
   public void setPointsPerActivity(String pointsPerActivity) { this.pointsPerActivity.set(pointsPerActivity); }
   public StringProperty pointsPerActivityProperty() { return pointsPerActivity; }
 
-  // ===== Date =====
+
   public String getDate() { return date.get(); }
   public void setDate(String date) { this.date.set(date); }
   public StringProperty dateProperty() { return date; }

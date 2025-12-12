@@ -21,7 +21,6 @@ import java.util.List;
 
 public class AddPointsController {
 
-  // ===================== TABLES =====================
 
   @FXML
   private TableView<Activity> pointsTable;
@@ -49,7 +48,6 @@ public class AddPointsController {
   private TableColumn<Activity, Number> numberOfAvailableActivities;
   @FXML private TableColumn<Activity, Number> dateOfActivity;
 
-  // ===================== INPUTS =====================
 
   @FXML
   private ComboBox<String> activitiesDropDown;
@@ -63,7 +61,7 @@ public class AddPointsController {
   @FXML
   private DatePicker datePoints;
 
-  // ===================== DATA =====================
+
 
   private final ObservableList<Activity> activities = FXCollections.observableArrayList();
   private final ObservableList<Activity> residentActivities = FXCollections.observableArrayList();
@@ -72,12 +70,11 @@ public class AddPointsController {
   private final File pointsFile = new File("points.json");
   private final File actualPointsFile = new File("actualPoints.json");
 
-  // ===================== INITIALIZE =====================
 
   @FXML
   private void initialize() {
 
-    // ----- Available activities table -----
+
     greenActivityTable.setCellValueFactory(
         new PropertyValueFactory<>("activity")
     );
@@ -100,7 +97,7 @@ public class AddPointsController {
 
     pointsTable.setItems(activities);
 
-    // ----- Resident points table -----
+
     residentIDpointsTable.setCellValueFactory(
         new PropertyValueFactory<>("residentId")
     );
@@ -128,7 +125,7 @@ public class AddPointsController {
 
     pointsResidentTable.setItems(residentActivities);
 
-    // ----- Dropdown setup -----
+
     ObservableList<String> activityNames = FXCollections.observableArrayList();
     activitiesDropDown.setItems(activityNames);
 
@@ -161,7 +158,7 @@ public class AddPointsController {
     loadActualActivitiesFromJson();
   }
 
-  // ===================== LOADERS =====================
+
 
   private void loadCitizensFromJson() {
     if (!usersFile.exists()) return;
@@ -174,6 +171,7 @@ public class AddPointsController {
       ObservableList<String> ids = FXCollections.observableArrayList();
       for (User u : users) {
         ids.add(u.getCitizenId());
+
       }
       citizenIdDropDown.setItems(ids);
 
@@ -196,7 +194,6 @@ public class AddPointsController {
   }
   private void loadActualActivitiesFromJson(){
     if(!actualPointsFile.exists()) return;
-
     try
     {
       ObjectMapper mapper = new ObjectMapper();
@@ -207,10 +204,11 @@ public class AddPointsController {
     }
   }
 
-  // ===================== ACTIONS =====================
+
 
   @FXML
   public void handleAddPointsButton() {
+
 
     String citizenId = citizenIdDropDown.getValue();
     String activityName = activitiesDropDown.getValue();
@@ -259,6 +257,8 @@ public class AddPointsController {
       ActivityCreateController controller = loader.getController();
       controller.setPointsController(this);
 
+
+
       stage.setTitle("Add Green Activity");
       stage.show();
 
@@ -289,7 +289,9 @@ public class AddPointsController {
       EditPointsController controller = fxmlLoader.getController();
       controller.setActivity(selectedResidentActivity);
       controller.setActivities(activities);
-      controller.setActivity(selectedResidentActivity);
+
+
+
 
       Stage stage = new Stage();
       stage.setTitle("Edit Points");
@@ -309,7 +311,6 @@ public class AddPointsController {
     }
   }
 
-  // ===================== CALLBACK =====================
 
   public void addActivity(Activity activity) {
     activities.add(activity);

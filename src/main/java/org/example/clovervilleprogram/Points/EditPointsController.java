@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.example.clovervilleprogram.Users.User;
 
 public class EditPointsController {
 
@@ -17,13 +18,14 @@ public class EditPointsController {
   @FXML private TextField pointsField;
   @FXML private ComboBox<String> activityBox;
 
+  private User user;
   private Activity activity;
   private ObservableList<Activity> activities;
 
   private final ObservableList<String> activityNames =
       FXCollections.observableArrayList();
 
-  // Called automatically by JavaFX
+
   @FXML
   public void initialize() {
     activityBox.setItems(activityNames);
@@ -47,7 +49,6 @@ public class EditPointsController {
         });
   }
 
-  // Inject activity list from main controller
   public void setActivities(ObservableList<Activity> activities) {
     this.activities = activities;
 
@@ -64,12 +65,12 @@ public class EditPointsController {
     });
   }
 
-  // Inject the Activity being edited
   public void setActivity(Activity activity) {
     this.activity = activity;
 
     citizenIdField.setEditable(false);
     citizenIdField.setText(activity.getResidentId());
+
 
     pointsField.setText(
         String.valueOf(activity.getPointsPerActivity())

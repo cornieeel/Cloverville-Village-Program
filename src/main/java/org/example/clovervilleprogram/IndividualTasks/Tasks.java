@@ -4,6 +4,9 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.example.clovervilleprogram.Users.User;
+
+import java.time.LocalDate;
 
 public class Tasks
 {
@@ -11,6 +14,10 @@ public class Tasks
   private String residentId;
   private int pointsPerActivity;
   private String date;
+
+
+
+  public Tasks(){};
 
   public Tasks(String activity, String residentId, int pointsPerActivity, String date){
     this.activity = activity;
