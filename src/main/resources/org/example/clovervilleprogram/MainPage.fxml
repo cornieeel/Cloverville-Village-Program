@@ -35,6 +35,7 @@
                         <Button fx:id="showUserPage" onAction="#showUserPage" prefHeight="23.0" prefWidth="152.0" styleClass="sidebar-button-active" text="Users" />
                         <Button fx:id="showPointsPage" onAction="#showPointsPage" styleClass="sidebar-button" text="Points" />
                         <Button fx:id="showTasksPage" onAction="#showTasksPage" styleClass="sidebar-button" text="Tasks" />
+                  <Button fx:id="showTradesPage" onAction="#showTradesPage" styleClass="sidebar-button" text="Trades" />
                     </children>
                 </VBox>
             </children>

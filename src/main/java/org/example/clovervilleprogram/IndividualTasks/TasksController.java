@@ -133,7 +133,6 @@ public class TasksController
       controller.setTask(selectedTask);
       controller.setTasksController(this);
 
-
       Stage stage = new Stage();
       stage.setTitle("Edit Task");
       stage.setScene(new Scene(root));

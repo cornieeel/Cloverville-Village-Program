@@ -131,3 +131,48 @@
   -fx-font-weight: 100;
   -fx-text-fill: #616161;
 }
+
+
+.trade-toolbar {
+  -fx-background-color: #CBEACB;
+  -fx-border-color: #44E151;
+  -fx-min-height: 35px;
+  -fx-min-width: 450px;
+  -fx-max-height: 35px;
+  -fx-max-width: 441px;
+}
+
+/* Labels */
+.trade-owner {
+  -fx-font-weight: bold;
+  -fx-text-fill: #4B7D6B;
+  -fx-font-size: 15px;
+}
+
+.trade-product {
+  -fx-text-fill: #4B7D6B;
+  -fx-font-weight: bold;
+  -fx-font-size: 15px;
+}
+
+.trade-price {
+  -fx-text-fill: #4B7D6B;
+  -fx-font-weight: bold;
+  -fx-font-size: 15px;
+}
+
+/* Buttons */
+.trade-accept {
+  -fx-text-fill: #31743F;
+  -fx-background-color: #77D28E;
+  -fx-border-color: #31743F;
+  -fx-font-size: 15px;
+}
+
+.trade-cancel {
+  -fx-text-fill: #FF1111;
+  -fx-border-color: #FF1111;
+  -fx-font-size: 15px;
+  -fx-background-color: #F6B4B4 ;
+}
+

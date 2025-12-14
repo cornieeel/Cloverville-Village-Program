@@ -14,6 +14,7 @@ public class MainController
   @FXML private Button showUserPage;
   @FXML private Button showPointsPage;
   @FXML private Button showTasksPage;
+  @FXML private Button showTradesPage;
 
 
 
@@ -31,6 +32,10 @@ public class MainController
   @FXML
   private void showTasksPage() {
     loadContent("/org/example/clovervilleprogram/TasksPage/IndividualTasks.fxml");
+  }
+  @FXML
+  private void showTradesPage(){
+    loadContent("/org/example/clovervilleprogram/TradesPage/TradesPage.fxml");
   }
 
   private void loadContent(String fxmlFile){

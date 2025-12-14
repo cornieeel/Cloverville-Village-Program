@@ -12,4 +12,6 @@ module org.example.clovervilleprogram {
   opens org.example.clovervilleprogram.App to javafx.fxml;
   exports org.example.clovervilleprogram.IndividualTasks;
   opens org.example.clovervilleprogram.IndividualTasks to javafx.fxml;
+  exports org.example.clovervilleprogram.Trades;
+  opens org.example.clovervilleprogram.Trades to javafx.fxml;
 }
