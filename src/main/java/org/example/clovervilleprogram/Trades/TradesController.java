@@ -6,12 +6,16 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.example.clovervilleprogram.Users.User;
 
 import java.io.File;
@@ -93,7 +97,31 @@ public class TradesController
     );
     toolBar.setStyle("-fx-background-color: #CBEACB ; -fx-border-color: #44E151; -fx-min-height: 31px; -fx-min-width: 441px");
 
-    accept.setOnAction(e -> System.out.println("Accepted: " + trade));
+    accept.setOnAction(e -> {System.out.println("Accepted: " + trade);
+      try
+      {
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource(
+            "/org/example/clovervilleprogram/TradesPage/ConfirmTrades.fxml"));
+        Parent root = fxmlloader.load();
+
+        ConfirmTradesController controller = fxmlloader.getController();
+
+        controller.setTrade(trade);
+        controller.setOnTradeConfirmed(t -> {
+          tradesList.remove(t);
+          vBox.getChildren().remove(toolBar);
+        });
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Accept the trade");
+        stage.show();
+      }
+      catch (Exception ex)
+      {
+        throw new RuntimeException(ex);
+      }
+    });
     cancel.setOnAction(e -> {
       vBox.getChildren().remove(toolBar);
       tradesList.remove(trade);
