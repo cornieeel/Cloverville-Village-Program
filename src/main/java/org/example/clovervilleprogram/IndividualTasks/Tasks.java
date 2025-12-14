@@ -17,7 +17,7 @@ public class Tasks
 
 
 
-  public Tasks(){};
+  public Tasks(){}
 
   public Tasks(String activity, String residentId, int pointsPerActivity, String date){
     this.activity = activity;

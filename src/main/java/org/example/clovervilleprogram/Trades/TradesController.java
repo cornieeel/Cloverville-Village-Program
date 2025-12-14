@@ -2,6 +2,7 @@ package org.example.clovervilleprogram.Trades;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,34 +32,41 @@ public class TradesController
   @FXML private TextField goodToOffer;
   @FXML private DatePicker dateOfActivity;
 
+  private final ObservableList<Trades> tradesList = FXCollections.observableArrayList();
+
+  private final File tradesFile = new File("trades.json");
   private final File usersFile = new File("users.json");
 
   public void initialize(){
     loadCitizensFromJson();
+    loadTradesFromJson();
   }
 
   @FXML
   private void handleAddTrade() {
-
     if (residentName.getValue() == null ||
         goodToOffer.getText().isEmpty() ||
         priceOfProduct.getText().isEmpty()) {
       return;
     }
 
-    Label owner = new Label("Owner: " + residentName.getValue());
-    Label product = new Label(goodToOffer.getText());
-    Label price = new Label(priceOfProduct.getText());
-
-    Button accept = new Button("✔");
-    Button cancel = new Button("✖");
-
-    Trades trades = new Trades(
+    Trades trade = new Trades(
         residentName.getValue(),
         goodToOffer.getText(),
         Integer.parseInt(priceOfProduct.getText()),
         dateOfActivity.getValue().toString()
     );
+
+    tradesList.add(trade);
+    addTradeToVBox(trade);
+  }
+  private void addTradeToVBox(Trades trade) {
+    Label owner = new Label("Owner: " + trade.getResidentName());
+    Label product = new Label(trade.getGoodToOffer());
+    Label price = new Label(String.valueOf(trade.getPrice()));
+
+    Button accept = new Button("✔");
+    Button cancel = new Button("✖");
 
     Region leftSpacer = new Region();
     HBox.setHgrow(leftSpacer, Priority.ALWAYS);
@@ -85,21 +93,43 @@ public class TradesController
     );
     toolBar.setStyle("-fx-background-color: #CBEACB ; -fx-border-color: #44E151; -fx-min-height: 31px; -fx-min-width: 441px");
 
-    accept.setOnAction(e -> {
-      System.out.println("Accepted: " + trades);
+    accept.setOnAction(e -> System.out.println("Accepted: " + trade));
+    cancel.setOnAction(e -> {
+      vBox.getChildren().remove(toolBar);
+      tradesList.remove(trade);
     });
 
-    cancel.setOnAction(e -> vBox.getChildren().remove(toolBar));
 
     vBox.getChildren().add(toolBar);
   }
+
   @FXML private void handleResetFields(){
 
   }
   public void handleExportButton(){
-
+    try{
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.enable(SerializationFeature.INDENT_OUTPUT);
+      mapper.writeValue(tradesFile, tradesList);
+  } catch (Exception e){
+    e.printStackTrace();
+    }
   }
+  public void loadTradesFromJson(){
+    ObjectMapper mapper = new ObjectMapper();
 
+    if(tradesFile.exists()){
+      try{
+        List<Trades> trades = mapper.readValue(tradesFile, new TypeReference<List<Trades>>() {});
+        tradesList.setAll(trades);
+        for (Trades trade : tradesList) {
+          addTradeToVBox(trade);
+        }
+      } catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+  }
   public void loadCitizensFromJson(){
     if(!usersFile.exists()) return;
     try
