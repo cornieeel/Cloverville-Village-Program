@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloverville | Green Actions</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://kit.fontawesome.com/ae7d3e5717.js"></script>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.webp" alt="Cloverville logo" class="logo" />
+    </a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      &#9776;
+    </button>
+
+    <nav class="nav-links" id="primary-nav">
+      <ul>
+        <!-- Active page is Home -->
+        <li><a href="index.html">Home</a></li>
+        <li><a href="green-actions.html" class="current-page">Green Actions</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="points.html">Points</a></li>
+        <li>
+          <a href="our-developers.html">Our Developers</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Green actions section -->
+    <section class="section green-actions">
+      <h1 class="page-title">Green Actions Completed Last Week</h1>
+
+      <article class="actions-card">
+        <div class="actions-header">
+          <div>
+            <h2 class="actions-title"><!-- Week 47(Javascript) --></h2>
+            <p class="actions-goal"><!-- 10.11 to 17.11 (Javascript) --></p>
+          </div>
+          <div class="actions-points"><!-- Number of points this week (Javascript) --></div>
+        </div>
+
+        <div class="info-block is-collapsed" id="info-block">
+          <i class="fa-solid fa-circle-info" aria-hidden="true" id="info-icon"></i>
+          <p>
+            This page shows all green work in Cloverville during the last
+            week. Green actions are listed anonymously and every activity
+            contributes to our shared point pool.
+          </p>
+        </div>
+
+        <table class="actions-table" id="actions-table" data-week="47">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Green activity</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody id="actions-table-body" class="actions-table-body">
+            <!-- Data from Json file (Javascript) -->
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.webp" alt="Cloverville logo" class="logo" />
+    </a>
+    <p>© 2025 Cloverville. All rights reserved.</p>
+  </footer>
+  <script src="js/weekPoints.js"></script>
+  <script src="js/hamburger.js"></script>
+</body>
+
+</html>

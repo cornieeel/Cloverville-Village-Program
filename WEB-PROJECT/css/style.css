@@ -1,0 +1,858 @@
+/* =========================
+   Base layout
+   ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  /* stop horizontal overflow on small screens */
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* header, main, footer */
+  min-height: 100vh;
+}
+
+main {
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+}
+
+/* Generic section styles */
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.page-title {
+  margin: 0 0 1rem;
+  font-size: 1.7rem;
+}
+
+.section-subtitle {
+  margin: 0 0 1.8rem;
+  max-width: 540px;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* =========================
+   Navigation bar
+   ========================= */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  flex-direction: row;
+  height: 64px;
+  background: #024524;
+  color: #f9fafb;
+  position: relative;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: #f9fafb;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+}
+
+.nav-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.6rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e5f5eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid transparent;
+}
+
+/* highlight current page link */
+
+.nav-links a.current-page {
+  border-bottom-color: #fbbf24;
+}
+
+/* =========================
+   Footer
+   ========================= */
+
+.footer {
+  background: #111827;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer .logo {
+  height: 24px;
+}
+
+/* =========================
+   Home page - hero
+   ========================= */
+
+.hero {
+  position: relative;
+  margin-bottom: 3rem;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  /* image and text overlap */
+  place-items: center;
+}
+
+.hero-img {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+
+/* dark overlay on hero image */
+
+.hero::before {
+  content: "";
+  /* so ::before exists but shows no text */
+  grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+      rgba(2, 69, 36, 0.92),
+      rgba(11, 107, 62, 0.55));
+}
+
+.hero-content {
+  grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  color: #f9fafb;
+  padding: 1.8rem 2rem;
+  max-width: 520px;
+}
+
+.hero-small-text {
+  display: inline-block;
+  padding: 0.1rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(229, 245, 235, 0.6);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 1rem 0 0.4rem;
+  font-size: clamp(2.4rem, 4vw, 3.1rem);
+  letter-spacing: 0.08em;
+}
+
+.hero-text {
+  margin: 0;
+  font-size: 0.96rem;
+  max-width: 32rem;
+  opacity: 0.95;
+}
+
+.hero-actions {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* buttons */
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn-primary {
+  background: #0b6b3e;
+  color: #f9fafb;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.btn-transparent {
+  background: rgba(15, 23, 42, 0.18);
+  color: #e5f5eb;
+}
+
+.btn-transparent:hover {
+  background: rgba(15, 23, 42, 0.28);
+}
+
+/* =========================
+   Home page - our story
+   ========================= */
+
+.our-story {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+}
+
+.our-story h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.7rem;
+}
+
+.our-story p {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+/* =========================
+   Home page - activities
+   ========================= */
+
+.activities {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.7rem;
+}
+
+.activities h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.7rem;
+}
+
+.activities-card {
+  display: grid;
+  /* text and image side by side */
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.6rem 1.8rem;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+/* second card uses this class so image is on the left on desktop */
+
+.activities-card-image-left {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+}
+
+.activities-card-text {
+  max-width: 36rem;
+}
+
+.activity-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.activity-extra-line {
+  margin: 0 0 0.7rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #0b6b3e;
+}
+
+.activity-description {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.activities-card-image img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* =========================
+   Responsive rules
+   ========================= */
+
+/* --- TABLET (768px) and below --- */
+@media (max-width: 768px) {
+
+
+  /* 1. Stack the footer content */
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  /* 2. Fix the Hero Image overflow (from previous fix) */
+  .hero-img {
+    height: 100%;
+    min-height: 260px;
+  }
+
+  /* 3. Stack Activity Cards (Image on top of text) */
+  .activities-card {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  /* Reset the "image left" logic so it stacks consistently */
+  .activities-card-image-left {
+    grid-template-columns: 1fr;
+  }
+
+  .activities-card-image {
+    margin-top: 1rem;
+    /* Move image to top visually if preferred, or keep at bottom */
+    order: -1;
+  }
+
+  /* 4. Stack the Points Page layout */
+  .points-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links a {
+    font-size: 0.7rem;
+  }
+}
+
+/* --- MOBILE (480px) and below - Covers 375px --- */
+@media (max-width: 480px) {
+
+  /* 1. Navbar: Allow wrapping so links don't break */
+  .navbar {
+    height: 64px;
+    flex-direction: row;
+    /* Remove fixed height */
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    z-index: 1000;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #024524;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .nav-links.is-open {
+    display: block;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 0.4rem 0;
+  }
+
+  /* 2. Main Container: Gain more space by reducing padding */
+  main {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  /* 3. Hero: Resize text for small screens */
+  .hero-content {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    /* Prevent "Cloverville" from being too wide */
+  }
+
+  /* 4. Grids: Ensure they don't get too narrow */
+  .rewards-grid,
+  .tasks-grid,
+  .devs-grid {
+    grid-template-columns: 1fr;
+    /* Force single column on tiny screens */
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================
+   Points page layout
+   ========================= */
+
+.points {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.points-layout {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 1.7rem;
+}
+
+/* =========================
+   Reward cards
+   ========================= */
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.3rem;
+}
+
+.reward-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.6rem 1.5rem 1.3rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.reward-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0b6b3e, #22c55e);
+}
+
+/* hover effect */
+
+.reward-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.14);
+  border-color: rgba(11, 107, 62, 0.45);
+}
+
+.reward-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #0f172a;
+}
+
+.reward-image {
+  width: 100%;
+  max-width: 220px;
+  height: 130px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+.reward-points {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #065f46;
+  padding: 0.25rem 1.1rem;
+  border-radius: 999px;
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+}
+
+/* status text under points */
+
+.reward-status-text {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.reward-status-done {
+  color: #6b7280;
+}
+
+.reward-status-next {
+  color: #0b6b3e;
+}
+
+.reward-card-done {
+  opacity: 0.85;
+}
+
+.reward-card-done::before {
+  background: #9ca3af;
+}
+
+.reward-card-done .reward-image {
+  filter: grayscale(0.3);
+}
+
+.reward-card-done .reward-title {
+  color: #4b5563;
+}
+
+.reward-card-next::before {
+  background: linear-gradient(90deg, #f97316, #facc15);
+}
+
+/* =========================
+   Summary card and progress
+   ========================= */
+
+.points-summary-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem 1.6rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.summary-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.summary-value {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.summary-goal {
+  margin: 0.2rem 0 0.7rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.summary-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.progress-bar {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  margin-top: 0.2rem;
+}
+
+.segment-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: white;
+  opacity: 0.9;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0b6b3e, #f3a144);
+}
+
+/* =========================
+   Green actions page
+   ========================= */
+
+.green-actions {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.actions-card {
+  margin-top: 0.5rem;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem 1.5rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.actions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.9rem;
+}
+
+.actions-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.actions-goal {
+  margin: 0.25rem 0 0;
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.actions-points {
+  font-weight: 700;
+  color: #16a34a;
+  font-size: 0.95rem;
+}
+
+/* info line under the header */
+
+.info-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.info-block i {
+  color: #0b6b3e;
+  margin-top: 0.15rem;
+  cursor: pointer;
+}
+
+.info-block.is-collapsed p {
+  display: none;
+}
+
+/* table styling */
+
+.actions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.actions-table thead {
+  background: #e5f5eb;
+}
+
+.actions-table th,
+.actions-table td {
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.actions-table tbody tr:nth-child(even) td {
+  background: #f9fafb;
+}
+
+.actions-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* =========================
+   Tasks page
+   ========================= */
+
+.tasks {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.tasks-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+
+.task-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.task-icon-circle {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.task-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.task-title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.task-owner {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.task-points {
+  margin: 0.1rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #065f46;
+}
+
+/* =========================
+   Developers page
+   ========================= */
+
+.developers {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.devs-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.5rem;
+}
+
+.dev-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.4rem 1.2rem 1.2rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.dev-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+  border-color: rgba(11, 107, 62, 0.4);
+}
+
+.dev-pfp {
+  width: 82px;
+  height: 82px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+  border: 3px solid rgba(11, 107, 62, 0.35);
+}
+
+.dev-pfp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dev-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.dev-role {
+  margin: 0;
+  font-size: 0.83rem;
+}

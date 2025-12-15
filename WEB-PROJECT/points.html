@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloverville | Points</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://kit.fontawesome.com/ae7d3e5717.js"></script>
+</head>
+
+<body>
+  <!-- Navigation bar -->
+  <header class="navbar">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.webp" alt="Cloverville logo" class="logo" />
+    </a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      &#9776;
+    </button>
+
+    <nav class="nav-links" id="primary-nav">
+      <ul>
+        <!-- Active page is Home -->
+        <li><a href="index.html">Home</a></li>
+        <li><a href="green-actions.html">Green Actions</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="points.html" class="current-page">Points</a></li>
+        <li>
+          <a href="our-developers.html">Our Developers</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Points and rewards -->
+    <section class="section points" id="points">
+      <h1 class="page-title">Community Points and Rewards</h1>
+
+      <p class="section-subtitle">
+        Green actions in Cloverville add points to a shared pool. When the
+        pool reaches a target, the village unlocks a new community reward.
+      </p>
+
+      <div class="points-layout">
+        <!-- Rewards cards -->
+        <div class="rewards-grid">
+          <!-- already unlocked -->
+          <article class="reward-card reward-card-next" id="pizza-card">
+            <h2 class="reward-title">Pizza party</h2>
+            <img src="images/pizza-night.png" alt="People sharing a pizza" class="reward-image" />
+            <p class="reward-points">500 points</p>
+            <p class="reward-status-text reward-status-done" id="pizza-unlocked">
+              <!-- If it was unlocked or not yet -->
+            </p>
+          </article>
+
+          <!-- already unlocked -->
+          <article class="reward-card reward-card-next" id="outdoor-card">
+            <h2 class="reward-title">Outdoor movie night</h2>
+            <img src="images/movie-night.png" alt="Outdoor movie setup" class="reward-image" />
+            <p class="reward-points">1 000 points</p>
+            <p class="reward-status-text reward-status-done" id="outdoor-unlocked">
+              <!-- If it was unlocked or not yet -->
+            </p>
+          </article>
+
+          <!-- next reward (still locked) -->
+          <article class="reward-card reward-card-next" id="wellness-card">
+            <h2 class="reward-title">Wellness day</h2>
+            <img src="images/wellness-day.png" alt="Sauna and wellness area" class="reward-image" />
+            <p class="reward-points">1 500 points</p>
+            <p class="reward-status-text reward-status-done" id="wellness-unlocked">
+              <!-- If it was unlocked or not yet --></p>
+          </article>
+        </div>
+
+        <!-- Summary and progress bar -->
+        <article class="summary-card points-summary-card">
+          <h2 class="summary-title">Total points</h2>
+          <p class="summary-value"> <!-- Total Number Of Points --></p>
+          <p class="summary-goal">
+            <!-- Next reward: wellness day at 1 500 points. -->
+          </p>
+
+          <div class="progress-bar" aria-label="Progress toward next community reward">
+            <!-- width can later be changed with js -->
+            <div class="progress-fill" id="points-progress" style="width: 80%"></div>
+
+            <div class="segment-line" style="left: 33%;"></div>
+            <div class="segment-line" style="left: 66%;"></div>
+          </div>
+
+          <p class="summary-note">
+            <!-- 80 percent of the way to the next reward. -->
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.webp" alt="Cloverville logo" class="logo" />
+    </a>
+    <p>© 2025 Cloverville. All rights reserved.</p>
+  </footer>
+  <script src="js/points.js"></script>
+  <script src="js/hamburger.js"></script>
+</body>
+
+</html>

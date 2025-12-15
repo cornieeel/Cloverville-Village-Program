@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloverville | Home</title>
+  <!-- Main stylesheet for all Cloverville pages -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!-- Top navigation bar with logo and links to all pages -->
+  <header class="navbar">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.webp" alt="Cloverville logo" class="logo" />
+    </a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      &#9776;
+    </button>
+
+    <nav class="nav-links" id="primary-nav">
+      <ul>
+        <!-- Active page is Home -->
+        <li><a href="index.html" class="current-page">Home</a></li>
+        <li><a href="green-actions.html">Green Actions</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="points.html">Points</a></li>
+        <li>
+          <a href="our-developers.html">Our Developers</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <!-- Hero section with background image and short intro text -->
+    <section class="hero">
+      <img src="images/hero-pic.png" alt="Illustration of the Cloverville eco village" class="hero-img" />
+      <div class="hero-content">
+        <p class="hero-small-text">Eco village · 42 residents</p>
+        <h1 class="hero-title">Cloverville</h1>
+        <p class="hero-text">
+          A small village where everyday choices become shared climate
+          capital. This website shows how cycling, composting and vegan
+          dinners quietly add up to big change.
+        </p>
+        <!-- Buttons that link to other parts of the project -->
+        <div class="hero-actions">
+          <a href="green-actions.html" class="btn btn-primary">
+            View last week's green actions
+          </a>
+          <a href="#our-story" class="btn btn-transparent">
+            How the point system works
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Short introduction to the Cloverville story -->
+    <section class="section our-story" id="our-story">
+      <h2>Our story</h2>
+      <p>
+        Cloverville is a small eco village where 42 residents work together to
+        live more sustainably. We grow food, share tools and reduce waste
+        wherever we can. To make our everyday green efforts visible, Green Bob
+        created a simple system that tracks our sustainable actions, communal
+        tasks and small point based trades. The website shares our ideas and
+        shows how small actions add up to real community impact.
+      </p>
+    </section>
+
+    <!-- Example green activities to show how the system works -->
+    <section class="section activities" id="green-activities">
+      <h2>Green activities in Cloverville</h2>
+
+      <!-- First activity card about cycling -->
+      <div class="activities-card">
+        <div class="activities-card-text">
+          <h3 class="activity-title">Cycling instead of driving</h3>
+          <p class="activity-extra-line">50 points · weekly action</p>
+          <p>
+            Cloverville residents often choose the bicycle instead of a car
+            and record it as a green action. Cycling to work for a whole week
+            is one of the most common examples. It is registered anonymously
+            in the system, adds green points to the shared climate capital and
+            appears in the catalogue of ideas so others can see what is
+            possible without it turning into a competition.
+          </p>
+        </div>
+        <div class="activities-card-image">
+          <img src="images/biking-man.png" alt="Resident cycling on the road near Cloverville" />
+        </div>
+      </div>
+
+      <!-- Second activity card about vegan food -->
+      <div class="activities-card activities-card-image-left">
+        <div class="activities-card-image">
+          <img src="images/green-food.png" alt="Plates of plant based food on a table" />
+        </div>
+        <div class="activities-card-text">
+          <h3 class="activity-title">Vegan dinner week</h3>
+          <p class="activity-extra-line">30 points · food action</p>
+          <p>
+            Another typical green action in Cloverville is eating vegan for a
+            week, often using vegetables grown in the village. Leftovers and
+            peels are composted and later returned to the shared gardens as
+            nutrient rich soil. Like all green actions, this is registered
+            with green points and shown anonymously to inspire others to try
+            similar changes in their everyday life.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer is repeated on all pages -->
+  <footer class="footer">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.webp" alt="Cloverville logo" class="logo" />
+    </a>
+    <p>© 2025 Cloverville. All rights reserved.</p>
+  </footer>
+  <script src="js/hamburger.js"></script>
+</body>
+
+</html>

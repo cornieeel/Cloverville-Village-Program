@@ -3,9 +3,11 @@ package org.example.clovervilleprogram.App;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ClovervilleApplication extends Application {
   @Override
@@ -18,6 +20,10 @@ public class ClovervilleApplication extends Application {
 
     stage.setTitle("CloverVille App!");
     stage.setScene(scene);
+    Image image = new Image(Objects.requireNonNull(
+        ClovervilleApplication.class.getResourceAsStream("/images/logo.png"))
+    );
+    stage.getIcons().add(image);
     stage.show();
   }
 
