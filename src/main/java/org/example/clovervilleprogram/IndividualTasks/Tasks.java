@@ -21,19 +21,19 @@ public class Tasks {
     this.date.set(date);
   }
 
-  // ===== Getters (for JSON & logic) =====
+
   public String getIndividualActivity() { return individualActivity.get(); }
   public String getResidentId() { return residentId.get(); }
   public int getPointsPerActivity() { return pointsPerActivity.get(); }
   public String getDate() { return date.get(); }
 
-  // ===== Setters =====
+
   public void setIndividualActivity(String individualActivity) { this.individualActivity.set(individualActivity); }
   public void setResidentId(String residentId) { this.residentId.set(residentId); }
   public void setPointsPerActivity(int pointsPerActivity) { this.pointsPerActivity.set(pointsPerActivity); }
   public void setDate(String date) { this.date.set(date); }
 
-  // ===== JavaFX Properties =====
+
   public StringProperty individualActivityProperty() { return individualActivity; }
   public StringProperty residentIdProperty() { return residentId; }
   public IntegerProperty pointsPerActivityProperty() { return pointsPerActivity; }

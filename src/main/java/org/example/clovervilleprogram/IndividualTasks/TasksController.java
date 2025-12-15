@@ -21,27 +21,24 @@ import java.util.Map;
 
 public class TasksController {
 
-  // ===================== INPUTS =====================
   @FXML private ComboBox<String> residentId;
   @FXML private DatePicker dateOfActivity;
   @FXML private TextField individualActivity;
   @FXML private TextField pointsPerActivity;
 
-  // ===================== TABLE =====================
   @FXML private TableView<Tasks> individualTasksTable;
   @FXML private TableColumn<Tasks, Number> numberTable;
   @FXML private TableColumn<Tasks, String> fullName;
   @FXML private TableColumn<Tasks, String> individualTask;
   @FXML private TableColumn<Tasks, Number> pointsPerActivityTable;
 
-  // ===================== DATA =====================
+
   private final ObservableList<Tasks> tasksLists = FXCollections.observableArrayList();
 
   private final File tasksFile = new File("tasks.json");
   private final File usersFile = new File("users.json");
   private final File userPointsFile = new File("userPoints.json");
 
-  // ===================== INITIALIZE =====================
   @FXML
   public void initialize() {
 
@@ -63,7 +60,7 @@ public class TasksController {
     loadCitizensFromJson();
   }
 
-  // ===================== ACTIONS =====================
+
   @FXML
   public void handleAddActivity() {
 
@@ -126,7 +123,6 @@ public class TasksController {
     }
   }
 
-  // ===================== EXPORT =====================
   @FXML
   public void handleExportButton() {
 
@@ -134,10 +130,8 @@ public class TasksController {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-      // 1️⃣ Export individual tasks
       mapper.writeValue(tasksFile, tasksLists);
 
-      // 2️⃣ Accumulate points per user
       Map<String, Integer> pointsMap = new HashMap<>();
 
       for (Tasks task : tasksLists) {
@@ -148,7 +142,6 @@ public class TasksController {
         );
       }
 
-      // 3️⃣ Export accumulated points
       mapper.writeValue(userPointsFile, pointsMap);
 
     } catch (IOException e) {
@@ -156,8 +149,6 @@ public class TasksController {
     }
   }
 
-
-  // ===================== LOADERS =====================
   private void loadTasksFromJson() {
     if (!tasksFile.exists()) return;
 
@@ -190,7 +181,6 @@ public class TasksController {
     }
   }
 
-  // ===================== HELPERS =====================
   public void refreshTable() {
     individualTasksTable.refresh();
   }

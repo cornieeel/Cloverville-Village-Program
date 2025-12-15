@@ -25,7 +25,7 @@ public class EditTasksController {
 
   private final File usersFile = new File("users.json");
 
-  // ===================== SETTERS =====================
+
   public void setTask(Tasks task) {
     this.task = task;
 
@@ -40,7 +40,6 @@ public class EditTasksController {
     this.tasksController = controller;
   }
 
-  // ===================== ACTIONS =====================
   @FXML
   public void handleSaveButton() {
 
@@ -66,7 +65,6 @@ public class EditTasksController {
     closeWindow();
   }
 
-  // ===================== HELPERS =====================
   private void loadResidents() {
 
     if (!usersFile.exists()) return;
