@@ -1,11 +1,6 @@
 [ {
-  "residentName" : "Taylor Swift",
+  "residentName" : "David",
   "goodToOffer" : "dsa",
-  "price" : 100,
-  "date" : "2025-12-04"
-}, {
-  "residentName" : "Taylor Swift",
-  "goodToOffer" : "dsa",
-  "price" : 100,
-  "date" : "2025-12-04"
+  "price" : 10,
+  "date" : "2025-12-17"
 } ]

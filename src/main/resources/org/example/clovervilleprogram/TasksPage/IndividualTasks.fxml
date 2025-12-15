@@ -67,7 +67,7 @@
                                           <Insets right="10.0" />
                                       </GridPane.margin>
                         </Label>
-                        <TextField fx:id="activity" layoutX="103.0" layoutY="11.0" prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="individualActivity" layoutX="103.0" layoutY="11.0" prefHeight="30.0" prefWidth="216.0" style="-fx-border-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <DatePicker fx:id="dateOfActivity" prefHeight="30.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ComboBox fx:id="residentId" prefHeight="25.0" prefWidth="216.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
                               </children>

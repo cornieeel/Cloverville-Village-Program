@@ -1,6 +1,11 @@
 [ {
-  "residentId" : "Negru Cornel",
-  "pointsPerActivity" : 100,
-  "date" : "2025-12-09",
-  "individualActivity" : "sj"
+  "individualActivity" : "walking the dog",
+  "residentId" : "Khabib",
+  "pointsPerActivity" : 10,
+  "date" : "2025-12-25"
+}, {
+  "individualActivity" : "sad",
+  "residentId" : "Taylor Swift",
+  "pointsPerActivity" : 10,
+  "date" : "2025-12-24"
 } ]

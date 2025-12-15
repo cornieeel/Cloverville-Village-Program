@@ -4,62 +4,38 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.example.clovervilleprogram.Users.User;
 
-import java.time.LocalDate;
+public class Tasks {
 
-public class Tasks
-{
-  private String activity;
-  private String residentId;
-  private int pointsPerActivity;
-  private String date;
+  private final StringProperty individualActivity = new SimpleStringProperty();
+  private final StringProperty residentId = new SimpleStringProperty();
+  private final IntegerProperty pointsPerActivity = new SimpleIntegerProperty();
+  private final StringProperty date = new SimpleStringProperty();
 
+  public Tasks() {}
 
-
-  public Tasks(){}
-
-  public Tasks(String activity, String residentId, int pointsPerActivity, String date){
-    this.activity = activity;
-    this.residentId = residentId;
-    this.pointsPerActivity = pointsPerActivity;
-    this.date = date;
+  public Tasks(String individualActivity, String residentId, int pointsPerActivity, String date) {
+    this.individualActivity.set(individualActivity);
+    this.residentId.set(residentId);
+    this.pointsPerActivity.set(pointsPerActivity);
+    this.date.set(date);
   }
 
-  public String getIndividualActivity()
-  {
-    return activity;
-  }
+  // ===== Getters (for JSON & logic) =====
+  public String getIndividualActivity() { return individualActivity.get(); }
+  public String getResidentId() { return residentId.get(); }
+  public int getPointsPerActivity() { return pointsPerActivity.get(); }
+  public String getDate() { return date.get(); }
 
-  public String getDate()
-  {
-    return date;
-  }
+  // ===== Setters =====
+  public void setIndividualActivity(String individualActivity) { this.individualActivity.set(individualActivity); }
+  public void setResidentId(String residentId) { this.residentId.set(residentId); }
+  public void setPointsPerActivity(int pointsPerActivity) { this.pointsPerActivity.set(pointsPerActivity); }
+  public void setDate(String date) { this.date.set(date); }
 
-  public int getPointsPerActivity()
-  {
-    return pointsPerActivity;
-  }
-
-  public String getResidentId()
-  {
-    return residentId;
-  }
-  public void setIndividualActivity(String activity){
-    this.activity = activity;
-  }
-  public void setResidentId(String residentId){
-    this.residentId = residentId;
-  }
-  public void setPointsPerActivity(int pointsPerActivity){
-    this.pointsPerActivity = pointsPerActivity;
-  }
-  public void setDate(String date){
-    this.date = date;
-  }
-
-  public StringProperty activityProperty(){return new SimpleStringProperty(activity);}
-  public StringProperty residentIdProperty(){return new SimpleStringProperty(residentId);}
-  public IntegerProperty pointsPerActivityProperty(){return new SimpleIntegerProperty(pointsPerActivity);}
-  public StringProperty dateProperty(){return new SimpleStringProperty(date);}
+  // ===== JavaFX Properties =====
+  public StringProperty individualActivityProperty() { return individualActivity; }
+  public StringProperty residentIdProperty() { return residentId; }
+  public IntegerProperty pointsPerActivityProperty() { return pointsPerActivity; }
+  public StringProperty dateProperty() { return date; }
 }

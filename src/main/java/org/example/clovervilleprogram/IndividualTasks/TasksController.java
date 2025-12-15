@@ -5,131 +5,114 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.example.clovervilleprogram.Points.Activity;
 import org.example.clovervilleprogram.Users.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class TasksController
-{
+public class TasksController {
+
+  // ===================== INPUTS =====================
   @FXML private ComboBox<String> residentId;
   @FXML private DatePicker dateOfActivity;
-  @FXML private TextField activity;
+  @FXML private TextField individualActivity;
   @FXML private TextField pointsPerActivity;
 
+  // ===================== TABLE =====================
   @FXML private TableView<Tasks> individualTasksTable;
   @FXML private TableColumn<Tasks, Number> numberTable;
   @FXML private TableColumn<Tasks, String> fullName;
   @FXML private TableColumn<Tasks, String> individualTask;
   @FXML private TableColumn<Tasks, Number> pointsPerActivityTable;
 
+  // ===================== DATA =====================
   private final ObservableList<Tasks> tasksLists = FXCollections.observableArrayList();
 
   private final File tasksFile = new File("tasks.json");
   private final File usersFile = new File("users.json");
+  private final File userPointsFile = new File("userPoints.json");
 
-  public void initialize(){
+  // ===================== INITIALIZE =====================
+  @FXML
+  public void initialize() {
+
     fullName.setCellValueFactory(data -> data.getValue().residentIdProperty());
-    individualTask.setCellValueFactory(data -> data.getValue()
-            .activityProperty());
-    pointsPerActivityTable.setCellValueFactory(data -> data.getValue()
-            .pointsPerActivityProperty());
-    numberTable.setCellFactory(col -> new TableCell<>(){
+    individualTask.setCellValueFactory(data -> data.getValue().individualActivityProperty());
+    pointsPerActivityTable.setCellValueFactory(data -> data.getValue().pointsPerActivityProperty());
+
+    numberTable.setCellFactory(col -> new TableCell<>() {
       @Override
       protected void updateItem(Number item, boolean empty) {
         super.updateItem(item, empty);
-
-        if (empty) {
-          setText(null);
-        } else {
-          setText(String.valueOf(getIndex() + 1));
-        }
+        setText(empty ? null : String.valueOf(getIndex() + 1));
       }
     });
-    loadTasksFromJson();
-    individualTasksTable.setItems(tasksLists);
-    loadCitizensFromJson();
 
+    individualTasksTable.setItems(tasksLists);
+
+    loadTasksFromJson();
+    loadCitizensFromJson();
   }
 
-  public void handleAddActivity(){
+  // ===================== ACTIONS =====================
+  @FXML
+  public void handleAddActivity() {
 
-    Tasks tasks = new Tasks(
-        activity.getText(),
+    if (residentId.getValue() == null ||
+        individualActivity.getText().isEmpty() ||
+        pointsPerActivity.getText().isEmpty() ||
+        dateOfActivity.getValue() == null) {
+      return;
+    }
+
+    Tasks task = new Tasks(
+        individualActivity.getText(),
         residentId.getValue(),
         Integer.parseInt(pointsPerActivity.getText()),
         dateOfActivity.getValue().toString()
-
-
     );
-    tasksLists.add(tasks);
 
+    tasksLists.add(task);
+    clearFields();
   }
-  public void handleResetFields(){
 
-  }
-  public void loadCitizensFromJson(){
-      if(!usersFile.exists()) return;
-      try
-      {
-        ObjectMapper mapper = new ObjectMapper();
-        List<User> users = mapper.readValue(usersFile,
-            new TypeReference<List<User>>(){});
-
-        ObservableList<String> names = FXCollections.observableArrayList();
-        for (User u : users)
-        {
-          names.add(u.getFullName());
-        }
-        residentId.setItems(names);
-
-
-      } catch (Exception e){
-        e.printStackTrace();
-      }
-  }
-  public void loadTasksFromJson(){
-    ObjectMapper mapper = new ObjectMapper();
-    if(tasksFile.exists()){
-    try{
-      List<Tasks> tasks = mapper.readValue(tasksFile, new TypeReference<List<Tasks>>(){});
-       tasksLists.setAll(tasks);
-    }catch (Exception e){
-      e.printStackTrace();
-    }
-  }}
-  public void handleExportButton(){
-    try{
-      ObjectMapper mapper = new ObjectMapper();
-      mapper.enable(SerializationFeature.INDENT_OUTPUT);
-      mapper.writeValue(tasksFile, tasksLists);
-    } catch (IOException e){
-      e.printStackTrace();
+  @FXML
+  public void handleDeleteActivity() {
+    Tasks selected = individualTasksTable.getSelectionModel().getSelectedItem();
+    if (selected != null) {
+      tasksLists.remove(selected);
     }
   }
-  public void handleEditTasks(){
-    Tasks selectedTask =individualTasksTable.getSelectionModel().getSelectedItem();
+  @FXML
+  public void handleResetFields() {
+    individualActivity.clear();
+    residentId.getSelectionModel().clearSelection();
+    pointsPerActivity.clear();
+    dateOfActivity.setValue(null);
+  }
 
-    if(selectedTask == null){
-      System.out.println("No user selected");
-      return;
+  @FXML
+  public void handleEditTasks() {
 
-    }
-    try{
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/TasksPage/EditTasks.fxml"));
-      Parent root = fxmlLoader.load();
+    Tasks selectedTask = individualTasksTable.getSelectionModel().getSelectedItem();
+    if (selectedTask == null) return;
 
-      EditTasksController controller = fxmlLoader.getController();
+    try {
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/org/example/clovervilleprogram/TasksPage/EditTasks.fxml")
+      );
+      Parent root = loader.load();
+
+      EditTasksController controller = loader.getController();
       controller.setTask(selectedTask);
       controller.setTasksController(this);
 
@@ -137,18 +120,85 @@ public class TasksController
       stage.setTitle("Edit Task");
       stage.setScene(new Scene(root));
       stage.show();
-    }
-    catch (Exception e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
-  public void handleDeleteActivity(){
-    Tasks selectedTask = individualTasksTable.getSelectionModel().getSelectedItem();
 
-    tasksLists.remove(selectedTask);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
-  public void refreshTable(){
+
+  // ===================== EXPORT =====================
+  @FXML
+  public void handleExportButton() {
+
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+      // 1️⃣ Export individual tasks
+      mapper.writeValue(tasksFile, tasksLists);
+
+      // 2️⃣ Accumulate points per user
+      Map<String, Integer> pointsMap = new HashMap<>();
+
+      for (Tasks task : tasksLists) {
+        pointsMap.merge(
+            task.getResidentId(),
+            task.getPointsPerActivity(),
+            Integer::sum
+        );
+      }
+
+      // 3️⃣ Export accumulated points
+      mapper.writeValue(userPointsFile, pointsMap);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  // ===================== LOADERS =====================
+  private void loadTasksFromJson() {
+    if (!tasksFile.exists()) return;
+
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      List<Tasks> tasks =
+          mapper.readValue(tasksFile, new TypeReference<List<Tasks>>() {});
+      tasksLists.setAll(tasks);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void loadCitizensFromJson() {
+    if (!usersFile.exists()) return;
+
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      List<User> users =
+          mapper.readValue(usersFile, new TypeReference<List<User>>() {});
+
+      ObservableList<String> names = FXCollections.observableArrayList();
+      for (User u : users) {
+        names.add(u.getFullName());
+      }
+      residentId.setItems(names);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  // ===================== HELPERS =====================
+  public void refreshTable() {
     individualTasksTable.refresh();
+  }
+
+  private void clearFields() {
+    individualActivity.clear();
+    pointsPerActivity.clear();
+    dateOfActivity.setValue(null);
+    residentId.getSelectionModel().clearSelection();
   }
 }
