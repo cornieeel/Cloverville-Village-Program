@@ -43,7 +43,7 @@
                                   <RowConstraints prefHeight="35.0" />
                               </rowConstraints>
                               <children>
-                                  <Label styleClass="form-label" text="Resident ID:">
+                                  <Label styleClass="form-label" text="Name:">
                                       <GridPane.margin>
                                           <Insets right="10.0" />
                                       </GridPane.margin>

@@ -21,7 +21,7 @@ public class UserController {
 
   @FXML private TextField fullName;
   @FXML private DatePicker userAge;
-  @FXML private TextField userGender;
+  @FXML private ComboBox<String> userGender;
   @FXML private TextField citizenID;
   @FXML private Label errorLabel;
   @FXML private TableView<User> userTable;
@@ -38,91 +38,115 @@ public class UserController {
   @FXML
   public void initialize() {
 
+    userGender.getItems().addAll("Male", "Female", "Prefer not to specify");
+
     fullNameTable.setCellValueFactory(data -> data.getValue().fullNameProperty());
     ageTable.setCellValueFactory(data -> data.getValue().ageProperty());
     genderTable.setCellValueFactory(data -> data.getValue().genderProperty());
     citizenIdTable.setCellValueFactory(data -> data.getValue().citizenIdProperty());
-    numberOfPeople.setCellFactory(col -> new TableCell<>(){
+
+    numberOfPeople.setCellFactory(col -> new TableCell<>() {
       @Override
       protected void updateItem(Number item, boolean empty) {
         super.updateItem(item, empty);
-
-        if (empty) {
-          setText(null);
-        } else {
-          setText(String.valueOf(getIndex() + 1));
-        }
+        setText(empty ? null : String.valueOf(getIndex() + 1));
       }
     });
 
-    loadUsersFromJson();
+    enforceCitizenIdNumbersOnly();
+    autoCapitalizeFullName();
 
+    loadUsersFromJson();
     userTable.setItems(userList);
   }
 
-  private void loadUsersFromJson() {
-    ObjectMapper mapper = new ObjectMapper();
-    if (jsonFile.exists()) {
-      try {
-        List<User> users = mapper.readValue(jsonFile, new TypeReference<List<User>>() {});
-        userList.setAll(users);
-        System.out.println("Loaded " + users.size() + " users from JSON.");
-      } catch (IOException e) {
-        e.printStackTrace();
-        errorLabel.setVisible(true);
-        errorLabel.setText("Failed to load users from JSON!");
-        errorLabel.setStyle("-fx-text-fill: red;");
+
+
+  private void enforceCitizenIdNumbersOnly() {
+    citizenID.textProperty().addListener((obs, oldValue, newValue) -> {
+      if (!newValue.matches("\\d*")) {
+        citizenID.setText(newValue.replaceAll("\\D", ""));
+      }
+    });
+  }
+
+  private void autoCapitalizeFullName() {
+    fullName.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
+      if (!isFocused) {
+        fullName.setText(capitalizeName(fullName.getText()));
+      }
+    });
+  }
+
+  private String capitalizeName(String name) {
+    String[] parts = name.trim().toLowerCase().split("\\s+");
+    StringBuilder result = new StringBuilder();
+
+    for (String part : parts) {
+      if (!part.isEmpty()) {
+        result.append(Character.toUpperCase(part.charAt(0)))
+            .append(part.substring(1))
+            .append(" ");
       }
     }
+    return result.toString().trim();
   }
+
+  private boolean isValidFullName(String name) {
+    return name.matches("[A-Za-z]+\\s+[A-Za-z]+");
+  }
+
 
   public void handleRandomizeButton() {
     citizenID.setText(String.valueOf((int)(Math.random() * 90000000 + 10000000)));
   }
 
   public void handleAddPerson() {
-    if (fullName.getText().isEmpty() || userAge.getValue() == null ||
-        userGender.getText().isEmpty() || citizenID.getText().isEmpty()) {
-      errorLabel.setVisible(true);
-      errorLabel.setText("You need to fill all fields!");
-      errorLabel.setStyle("-fx-text-fill: red;");
+
+    if (fullName.getText().isEmpty() ||
+        userAge.getValue() == null ||
+        userGender.getValue() == null ||
+        citizenID.getText().isEmpty()) {
+
+      showError("You need to fill all fields!");
+      return;
+    }
+
+    if (!isValidFullName(fullName.getText())) {
+      showError("Please enter First and Last name (letters only).");
       return;
     }
 
     User user = new User(
-        fullName.getText(),
+        capitalizeName(fullName.getText()),
         userAge.getValue().toString(),
-        userGender.getText(),
+        userGender.getValue(),
         citizenID.getText()
     );
 
     userList.add(user);
-
-    errorLabel.setVisible(true);
-    errorLabel.setText("User added successfully!");
-    errorLabel.setStyle("-fx-text-fill: green;");
-
+    showSuccess("User added successfully!");
     handleResetFields();
   }
 
   public void handleResetFields() {
     fullName.clear();
     userAge.setValue(null);
-    userGender.clear();
+    userGender.setValue(null);
     citizenID.clear();
   }
 
   public void handleEditUser() {
     User selectedUser = userTable.getSelectionModel().getSelectedItem();
     if (selectedUser == null) {
-      errorLabel.setVisible(true);
-      errorLabel.setText("No user selected to edit!");
-      errorLabel.setStyle("-fx-text-fill: red;");
+      showError("No user selected to edit!");
       return;
     }
 
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/UserRegister/EditUser.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(
+          getClass().getResource("/org/example/clovervilleprogram/UserRegister/EditUser.fxml")
+      );
       Parent root = fxmlLoader.load();
 
       EditUserController controller = fxmlLoader.getController();
@@ -144,35 +168,50 @@ public class UserController {
     if (selectedUser != null) {
       userList.remove(selectedUser);
     } else {
-      errorLabel.setVisible(true);
-      errorLabel.setText("No user selected to delete!");
-      errorLabel.setStyle("-fx-text-fill: red;");
+      showError("No user selected to delete!");
     }
   }
 
-  public void exportToJson() {
+  public void handleExportButton() {
     ObjectMapper mapper = new ObjectMapper();
     mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
     try {
       mapper.writeValue(jsonFile, userList);
-      System.out.println("Exported " + userList.size() + " users to " + jsonFile.getAbsolutePath());
-      errorLabel.setVisible(true);
-      errorLabel.setText("Exported users to JSON successfully!");
-      errorLabel.setStyle("-fx-text-fill: green;");
+      showSuccess("Exported users to JSON successfully!");
     } catch (IOException e) {
       e.printStackTrace();
-      errorLabel.setVisible(true);
-      errorLabel.setText("Failed to export users!");
-      errorLabel.setStyle("-fx-text-fill: red;");
+      showError("Failed to export users!");
     }
-  }
-
-  public void handleExportButton() {
-    exportToJson();
   }
 
   public void refreshTable() {
     userTable.refresh();
+  }
+
+
+  private void loadUsersFromJson() {
+    if (!jsonFile.exists()) return;
+
+    ObjectMapper mapper = new ObjectMapper();
+    try {
+      List<User> users = mapper.readValue(jsonFile, new TypeReference<>() {});
+      userList.setAll(users);
+    } catch (IOException e) {
+      e.printStackTrace();
+      showError("Failed to load users from JSON!");
+    }
+  }
+
+  private void showError(String msg) {
+    errorLabel.setVisible(true);
+    errorLabel.setText(msg);
+    errorLabel.setStyle("-fx-text-fill: red;");
+  }
+
+  private void showSuccess(String msg) {
+    errorLabel.setVisible(true);
+    errorLabel.setText(msg);
+    errorLabel.setStyle("-fx-text-fill: green;");
   }
 }

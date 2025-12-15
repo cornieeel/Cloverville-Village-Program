@@ -78,11 +78,12 @@
                                   <Font size="10.0" />
                               </font>
                   </Button>
-                          <Button layoutX="265.0" layoutY="218.0" prefHeight="30.0" prefWidth="94.0" styleClass="button-gray" text="Reset fields">
+                          <Button layoutX="265.0" layoutY="218.0" onAction="#handleResetFields" prefHeight="30.0" prefWidth="94.0" styleClass="button-gray" text="Reset fields">
                               <font>
                                   <Font size="10.0" />
                               </font>
                   </Button>
+                  <Label fx:id="errorLabel" visible="false" layoutX="186.0" layoutY="272.0" text="Label" />
                       </children>
                   </AnchorPane>
               </content>
