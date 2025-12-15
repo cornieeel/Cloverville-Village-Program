@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("info-block").classList.toggle("is-collapsed");
     });
 
-    fetch('json/greenPoints.json')
+    fetch('/actualPoints.json')
         .then(response => response.json())
         .then(data => {
             const today = new Date();
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let greenPointsLastWeek = 0;
 
             data.forEach(item => {
-                const pts = Number(item.points);
-                const d = new Date(item.dateOfActivity);
+                const pts = Number(item.pointsPerActivity);
+                const d = new Date(item.date);
 
                 if (d >= weekAgo && d <= today) {
                     greenPointsLastWeek += pts;
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-              <td>${item.citizenId}</td>
+              <td>${item.residentId}</td>
               <td>${item.activity}</td>
               <td>${pts}</td>
                  `;

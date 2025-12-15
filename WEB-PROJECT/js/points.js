@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const MAX_POINTS = 1500;
 
-  fetch('json/greenPoints.json')
+  fetch('/actualPoints.json')
     .then(response => response.json())
     .then(data => {
       let greenPointsTotal = 0;
 
       data.forEach(item => {
-        greenPointsTotal += Number(item.points);
+        greenPointsTotal += Number(item.pointsPerActivity);
       });
 
       updateProgress(greenPointsTotal);
