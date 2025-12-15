@@ -82,7 +82,7 @@ public class EditPointsController {
     }
 
     activity.setActivity(activityName);
-    activity.setPointsPerActivity(pointsText);
+    activity.setPointsPerActivity(Integer.parseInt(pointsText));
 
     Stage stage = (Stage) saveButton.getScene().getWindow();
     stage.close();

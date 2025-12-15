@@ -22,6 +22,7 @@ public class EditTasksController {
   @FXML private TextField pointsEdit;
   @FXML private Button saveButton;
   @FXML private Button cancelButton;
+  @FXML private Label errorLabel;
 
   private final File usersFile = new File("users.json");
 
@@ -46,6 +47,9 @@ public class EditTasksController {
     if (residentCombo.getValue() == null ||
         tasksEdit.getText().isEmpty() ||
         pointsEdit.getText().isEmpty()) {
+      errorLabel.setVisible(true);
+      errorLabel.setStyle("-fx-text-fill: red");
+      errorLabel.setText("You need to fill all fields!");
       return;
     }
 

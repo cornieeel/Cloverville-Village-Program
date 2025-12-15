@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -43,12 +44,13 @@
                         <Insets right="15.0" />
                     </padding>
                 </Label>
-                <TextField fx:id="fullNameEdit" prefHeight="27.0" prefWidth="217.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
                 <TextField fx:id="pointsEdit" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="tasksEdit" layoutX="99.0" layoutY="75.0" prefHeight="26.0" prefWidth="203.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="residentCombo" prefHeight="26.0" prefWidth="198.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
             </children>
         </GridPane>
-        <Button  onAction="#handleSaveButton" fx:id="saveButton" layoutX="149.0" layoutY="176.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
-        <Button onAction="#handleCancelButton" fx:id="cancelButton" layoutX="249.0" layoutY="176.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+        <Button fx:id="saveButton" layoutX="149.0" layoutY="176.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+        <Button fx:id="cancelButton" layoutX="249.0" layoutY="176.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="230.0" text="sauguPUOhfusoagFIsgfgsaiFGasfigasFpasufg" textOverrun="CLIP" visible="false" />
     </children>
 </AnchorPane>

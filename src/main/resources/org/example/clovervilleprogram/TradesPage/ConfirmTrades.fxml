@@ -49,18 +49,19 @@
                 <TextField fx:id="tasksEdit" editable="false" layoutX="99.0" layoutY="75.0" prefHeight="26.0" prefWidth="203.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
-        <Button fx:id="saveButton" layoutX="245.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
-        <Button fx:id="cancelButton" onAction="#handleCancelButton" layoutX="358.0" layoutY="217.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+        <Button fx:id="saveButton" layoutX="231.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+        <Button fx:id="cancelButton" layoutX="336.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
       <ComboBox fx:id="buyersList" layoutX="432.0" layoutY="77.0" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 0;" />
       <Label layoutX="375.0" layoutY="82.0" text="Buyer:" textFill="#616161">
          <padding>
             <Insets right="15.0" />
          </padding>
       </Label>
-      <Label fx:id="textLabel" layoutX="403.0" layoutY="115.0" text="Points Available: 500" textFill="#1ba411" visible="false">
+      <Label fx:id="textLabel" alignment="CENTER" layoutX="403.0" layoutY="115.0" prefHeight="20.0" prefWidth="218.0" text="Points Available: 500" textFill="#1ba411" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <Label  visible="false" alignment="CENTER" layoutX="221.0" layoutY="231.0" prefHeight="17.0" prefWidth="218.0" text="Label" />
     </children>
 </AnchorPane>

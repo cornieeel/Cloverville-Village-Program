@@ -50,8 +50,8 @@
 
          </children>
       </GridPane>
-      <Button fx:id="saveButton" layoutX="119.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
-      <Button fx:id="cancelButton" layoutX="228.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
-      <Label fx:id="errorLabel" layoutX="198.0" layoutY="189.0" text="Label" />
+      <Button fx:id="saveButton" layoutX="141.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+      <Button fx:id="cancelButton" layoutX="239.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="150.0" layoutY="227.0" prefHeight="17.0" prefWidth="174.0" text="Label" visible="false" />
    </children>
 </AnchorPane>

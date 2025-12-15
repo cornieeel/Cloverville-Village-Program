@@ -2,11 +2,14 @@ package org.example.clovervilleprogram.Users;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -25,6 +28,9 @@ public class UserController {
   @FXML private TextField citizenID;
   @FXML private Label errorLabel;
   @FXML private TableView<User> userTable;
+  @FXML private TextField searchBar;
+  @FXML private Label errorLabel1;
+
 
   @FXML private TableColumn<User, String> fullNameTable;
   @FXML private TableColumn<User, String> ageTable;
@@ -57,31 +63,40 @@ public class UserController {
     autoCapitalizeFullName();
 
     loadUsersFromJson();
-    userTable.setItems(userList);
+
+    FilteredList<User> filteredData = new FilteredList<>(userList, p -> true);
+
+    searchBar.textProperty().addListener((obs, oldVal, newVal) -> {
+      String filter = newVal.toLowerCase().trim();
+      filteredData.setPredicate(user -> {
+        if (filter.isEmpty()) return true;
+        return user.getFullName().toLowerCase().contains(filter)
+            || user.getAge().toLowerCase().contains(filter)
+            || user.getGender().toLowerCase().contains(filter)
+            || user.getCitizenId().toLowerCase().contains(filter);
+      });
+    });
+
+    SortedList<User> sortedData = new SortedList<>(filteredData);
+    sortedData.comparatorProperty().bind(userTable.comparatorProperty());
+    userTable.setItems(sortedData);
   }
-
-
 
   private void enforceCitizenIdNumbersOnly() {
     citizenID.textProperty().addListener((obs, oldValue, newValue) -> {
-      if (!newValue.matches("\\d*")) {
-        citizenID.setText(newValue.replaceAll("\\D", ""));
-      }
+      if (!newValue.matches("\\d*")) citizenID.setText(newValue.replaceAll("\\D", ""));
     });
   }
 
   private void autoCapitalizeFullName() {
     fullName.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
-      if (!isFocused) {
-        fullName.setText(capitalizeName(fullName.getText()));
-      }
+      if (!isFocused) fullName.setText(capitalizeName(fullName.getText()));
     });
   }
 
   private String capitalizeName(String name) {
     String[] parts = name.trim().toLowerCase().split("\\s+");
     StringBuilder result = new StringBuilder();
-
     for (String part : parts) {
       if (!part.isEmpty()) {
         result.append(Character.toUpperCase(part.charAt(0)))
@@ -96,34 +111,26 @@ public class UserController {
     return name.matches("[A-Za-z]+\\s+[A-Za-z]+");
   }
 
-
   public void handleRandomizeButton() {
     citizenID.setText(String.valueOf((int)(Math.random() * 90000000 + 10000000)));
   }
 
   public void handleAddPerson() {
-
-    if (fullName.getText().isEmpty() ||
-        userAge.getValue() == null ||
-        userGender.getValue() == null ||
-        citizenID.getText().isEmpty()) {
-
+    if (fullName.getText().isEmpty() || userAge.getValue() == null
+        || userGender.getValue() == null || citizenID.getText().isEmpty()) {
       showError("You need to fill all fields!");
       return;
     }
-
     if (!isValidFullName(fullName.getText())) {
       showError("Please enter First and Last name (letters only).");
       return;
     }
-
     User user = new User(
         capitalizeName(fullName.getText()),
         userAge.getValue().toString(),
         userGender.getValue(),
         citizenID.getText()
     );
-
     userList.add(user);
     showSuccess("User added successfully!");
     handleResetFields();
@@ -134,30 +141,27 @@ public class UserController {
     userAge.setValue(null);
     userGender.setValue(null);
     citizenID.clear();
+    errorLabel.setVisible(false);
   }
 
   public void handleEditUser() {
     User selectedUser = userTable.getSelectionModel().getSelectedItem();
     if (selectedUser == null) {
-      showError("No user selected to edit!");
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("You must select an user!");
+      errorLabel1.setStyle("-fx-text-fill: red");
       return;
     }
-
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(
-          getClass().getResource("/org/example/clovervilleprogram/UserRegister/EditUser.fxml")
-      );
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/UserRegister/EditUser.fxml"));
       Parent root = fxmlLoader.load();
-
       EditUserController controller = fxmlLoader.getController();
       controller.setUser(selectedUser);
       controller.setUserController(this);
-
       Stage stage = new Stage();
       stage.setTitle("Edit User");
       stage.setScene(new Scene(root));
       stage.show();
-
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -165,23 +169,26 @@ public class UserController {
 
   public void handleDeleteButton() {
     User selectedUser = userTable.getSelectionModel().getSelectedItem();
-    if (selectedUser != null) {
-      userList.remove(selectedUser);
-    } else {
-      showError("No user selected to delete!");
+    if (selectedUser != null) userList.remove(selectedUser);
+    else
+    {
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("You must select an user!");
+      errorLabel1.setStyle("-fx-text-fill: red");
     }
   }
 
   public void handleExportButton() {
     ObjectMapper mapper = new ObjectMapper();
     mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
     try {
       mapper.writeValue(jsonFile, userList);
-      showSuccess("Exported users to JSON successfully!");
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("Users sent to JSON Successfully!");
+      errorLabel1.setStyle("-fx-text-fill: green");
     } catch (IOException e) {
       e.printStackTrace();
-      showError("Failed to export users!");
+
     }
   }
 
@@ -189,10 +196,8 @@ public class UserController {
     userTable.refresh();
   }
 
-
   private void loadUsersFromJson() {
     if (!jsonFile.exists()) return;
-
     ObjectMapper mapper = new ObjectMapper();
     try {
       List<User> users = mapper.readValue(jsonFile, new TypeReference<>() {});

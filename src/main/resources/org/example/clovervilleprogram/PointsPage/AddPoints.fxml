@@ -17,7 +17,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <GridPane layoutX="65.0" layoutY="77.0" prefHeight="79.0" prefWidth="280.0">
+        <GridPane layoutX="30.0" layoutY="76.0" prefHeight="79.0" prefWidth="330.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="89.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="191.0" />
@@ -37,11 +37,12 @@
                         <Insets right="15.0" />
                     </padding>
                 </Label>
-                <TextField fx:id="activityName" prefWidth="115.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
+                <TextField fx:id="activityName" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" />
                 <TextField fx:id="pointsPerActivity" style="-fx-background-color: white; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
-        <Button fx:id="saveButton" onAction="#handleSaveButton" layoutX="133.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
-        <Button  fx:id="cancelButton" onAction="#handleCancelButton" layoutX="232.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+        <Button fx:id="saveButton" layoutX="133.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00C130; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+        <Button fx:id="cancelButton" layoutX="232.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #FF5656; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="130.0" layoutY="219.0" prefHeight="17.0" prefWidth="198.0" text="Label" visible="false" />
     </children>
 </AnchorPane>

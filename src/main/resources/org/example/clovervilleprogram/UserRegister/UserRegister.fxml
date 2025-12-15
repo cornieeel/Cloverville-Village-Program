@@ -82,7 +82,7 @@
                      </font>
                   </Button>
                           <Button layoutX="375.0" layoutY="181.0" onAction="#handleRandomizeButton" prefHeight="27.0" prefWidth="57.0" styleClass="button-gray-small" text="Randomize" />
-                  <Label fx:id="errorLabel" layoutX="169.0" layoutY="267.0" text="Label" visible="false" />
+                  <Label fx:id="errorLabel" alignment="CENTER" layoutX="138.0" layoutY="267.0" prefHeight="17.0" prefWidth="254.0" text="Label" visible="false" />
                       </children>
                   </AnchorPane>
               </content>
@@ -93,7 +93,7 @@
               <content>
                   <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
                <children>
-                  <TableView fx:id="userTable" layoutX="10.0" layoutY="54.0" prefHeight="259.0" prefWidth="481.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="userTable" layoutX="10.0" layoutY="54.0" prefHeight="245.0" prefWidth="481.0" style="-fx-background-color: transparent;">
                     <columns>
                       <TableColumn fx:id="numberOfPeople" prefWidth="98.78173828125" text="Number" />
                       <TableColumn fx:id="fullNameTable" minWidth="0.0" prefWidth="99.04022216796875" text="Full name" />
@@ -102,7 +102,7 @@
                         <TableColumn fx:id="citizenIdTable" prefWidth="107.50479125976562" text="Citizen ID" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
+                  <TextField fx:id="searchBar" layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -122,6 +122,7 @@
                         <Font size="12.0" />
                      </font>
                   </Button>
+                  <Label fx:id="errorLabel1" alignment="CENTER" layoutX="136.0" layoutY="299.0" prefHeight="17.0" prefWidth="219.0" text="Label" visible="false" />
                </children>
             </AnchorPane>
               </content>

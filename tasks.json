@@ -28,4 +28,9 @@
   "residentId" : "Benjamin White",
   "pointsPerActivity" : 17,
   "date" : "2025-12-10"
+}, {
+  "individualActivity" : "Cas",
+  "residentId" : "Kristina Povazska",
+  "pointsPerActivity" : 10,
+  "date" : "2025-12-10"
 } ]

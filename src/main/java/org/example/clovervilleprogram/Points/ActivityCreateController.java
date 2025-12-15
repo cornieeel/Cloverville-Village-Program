@@ -1,6 +1,7 @@
 package org.example.clovervilleprogram.Points;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -11,22 +12,34 @@ public class ActivityCreateController {
   @FXML
   private TextField pointsPerActivity;
 
-  private AddPointsController pointsController;
+  @FXML private Label errorLabel;
 
+  private AddPointsController pointsController;
 
   public void setPointsController(AddPointsController pointsController) {
     this.pointsController = pointsController;
   }
 
-
   @FXML
   private void handleSaveButton() {
-    Activity activity = new Activity();
-    activity.setActivity(activityName.getText());
-    activity.setPointsPerActivity(pointsPerActivity.getText());
+    String name = activityName.getText().trim();
+    String pointsText = pointsPerActivity.getText().trim();
 
+    if (name.isEmpty() || pointsText.isEmpty()) {
+      errorLabel.setVisible(true);
+      errorLabel.setText("You need to fill both fields");
+      errorLabel.setStyle("-fx-text-fill: red");
+      return;
+    }
+    int points;
+    try {
+      points = Integer.parseInt(pointsText);
+    } catch (NumberFormatException e) {
+      return;
+    }
+
+    Activity activity = new Activity(name, points);
     pointsController.addActivity(activity);
-
 
     Stage stage = (Stage) activityName.getScene().getWindow();
     stage.close();

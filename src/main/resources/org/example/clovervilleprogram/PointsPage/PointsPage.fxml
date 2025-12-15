@@ -83,7 +83,7 @@
                                   <Font size="10.0" />
                               </font>
                   </Button>
-                  <Label fx:id="errorLabel" visible="false" layoutX="186.0" layoutY="272.0" text="Label" />
+                  <Label fx:id="errorLabel" alignment="CENTER" layoutX="170.0" layoutY="269.0" prefHeight="17.0" prefWidth="192.0" text="Label" visible="false" />
                       </children>
                   </AnchorPane>
               </content>
@@ -94,7 +94,7 @@
               <content>
                   <AnchorPane prefHeight="325.0" prefWidth="365.0" styleClass="tab-content">
                       <children>
-                          <TableView fx:id="pointsResidentTable" layoutX="10.0" layoutY="54.0" prefHeight="259.0" prefWidth="481.0" style="-fx-background-color: transparent;">
+                          <TableView fx:id="pointsResidentTable" layoutX="10.0" layoutY="54.0" prefHeight="237.0" prefWidth="481.0" style="-fx-background-color: transparent;">
                               <columns>
                                   <TableColumn fx:id="numberOfActivities" prefWidth="98.78173828125" text="Number" />
                                   <TableColumn fx:id="residentIDpointsTable" minWidth="0.0" prefWidth="99.04022216796875" text="Resident ID" />
@@ -103,7 +103,7 @@
                         <TableColumn fx:id="dateOfActivity" prefWidth="85.0" text="Date" />
                               </columns>
                           </TableView>
-                          <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
+                          <TextField fx:id="searchBarGreenPoints" layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
                               <font>
                                   <Font size="12.0" />
                               </font>
@@ -123,6 +123,7 @@
                                   <Font size="12.0" />
                               </font>
                           </Button>
+                  <Label fx:id="errorLabel1" layoutX="171.0" layoutY="298.0" text="Label" visible="false" />
                       </children>
             </AnchorPane>
               </content>
@@ -138,7 +139,7 @@
                         <TableColumn fx:id="pointsPerActivityTable" prefWidth="136.145263671875" text="Points per Activity" />
                      </columns>
                   </TableView>
-                  <TextField layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
+                  <TextField fx:id="searchBarAvailablePoints" layoutX="10.0" layoutY="17.0" prefHeight="28.0" prefWidth="387.0" promptText="Search..." style="-fx-border-radius: 0; -fx-border-color: #FFFFFF;">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -158,6 +159,7 @@
                         <Font size="12.0" />
                      </font>
                   </Button>
+                  <Label fx:id="errorLabel2" layoutX="171.0" layoutY="297.0" text="Label" visible="false" />
                </children>
             </AnchorPane>
          </content>

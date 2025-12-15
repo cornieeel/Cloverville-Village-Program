@@ -1,24 +1,35 @@
 package org.example.clovervilleprogram.Points;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Activity {
 
   private final StringProperty residentId;
   private final StringProperty activity;
-  private final StringProperty pointsPerActivity;
+  private final IntegerProperty pointsPerActivity;
   private final StringProperty date;
 
   public Activity() {
-    this("", "", "", "");
+    this("", "", 0, "");
   }
 
-  public Activity(String residentId, String activity, String pointsPerActivity, String date) {
+  public Activity(String residentId, String activity, int pointsPerActivity, String date) {
     this.residentId = new SimpleStringProperty(residentId);
     this.activity = new SimpleStringProperty(activity);
-    this.pointsPerActivity = new SimpleStringProperty(pointsPerActivity);
+    this.pointsPerActivity = new SimpleIntegerProperty(pointsPerActivity);
     this.date = new SimpleStringProperty(date);
+  }
+  public Activity(String activityName, int pointsPerActivity) {
+    this.activity = new SimpleStringProperty(activityName);
+    this.pointsPerActivity = new SimpleIntegerProperty(pointsPerActivity);
+    this.residentId = new SimpleStringProperty();
+    this.date = new SimpleStringProperty();
+
   }
 
 
@@ -32,9 +43,9 @@ public class Activity {
   public StringProperty activityProperty() { return activity; }
 
 
-  public String getPointsPerActivity() { return pointsPerActivity.get(); }
-  public void setPointsPerActivity(String pointsPerActivity) { this.pointsPerActivity.set(pointsPerActivity); }
-  public StringProperty pointsPerActivityProperty() { return pointsPerActivity; }
+  public int getPointsPerActivity() { return pointsPerActivity.get(); }
+  public void setPointsPerActivity(int pointsPerActivity) { this.pointsPerActivity.set(pointsPerActivity); }
+  public IntegerProperty pointsPerActivityProperty() { return pointsPerActivity; }
 
 
   public String getDate() { return date.get(); }

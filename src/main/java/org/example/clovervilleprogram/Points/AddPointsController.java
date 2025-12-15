@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,36 +23,25 @@ import java.util.List;
 
 public class AddPointsController {
 
-  @FXML
-  private TableView<Activity> pointsTable;
-  @FXML
-  private TableColumn<Activity, String> greenActivityTable;
-  @FXML
-  private TableColumn<Activity, Number> pointsPerActivityTable;
-  @FXML
-  private TableView<Activity> pointsResidentTable;
-  @FXML
-  private TableColumn<Activity, String> residentIDpointsTable;
-  @FXML
-  private TableColumn<Activity, String> greenActivityResidentTable;
-  @FXML
-  private TableColumn<Activity, Number> pointsPerActivityResidentTable;
-  @FXML
-  private TableColumn<Activity, Number> numberOfActivities;
-  @FXML
-  private TableColumn<Activity, Number> numberOfAvailableActivities;
-  @FXML
-  private TableColumn<Activity, Number> dateOfActivity;
-  @FXML
-  private ComboBox<String> activitiesDropDown;
-  @FXML
-  private ComboBox<String> citizenIdDropDown;
-  @FXML
-  private TextField pointsField;
-  @FXML
-  private DatePicker datePoints;
-  @FXML
-  private Label errorLabel;
+  @FXML private TableView<Activity> pointsTable;
+  @FXML private TableColumn<Activity, String> greenActivityTable;
+  @FXML private TableColumn<Activity, Number> pointsPerActivityTable;
+  @FXML private TableView<Activity> pointsResidentTable;
+  @FXML private TableColumn<Activity, String> residentIDpointsTable;
+  @FXML private TableColumn<Activity, String> greenActivityResidentTable;
+  @FXML private TableColumn<Activity, Number> pointsPerActivityResidentTable;
+  @FXML private TableColumn<Activity, Number> numberOfActivities;
+  @FXML private TableColumn<Activity, Number> numberOfAvailableActivities;
+  @FXML private TableColumn<Activity, Number> dateOfActivity;
+  @FXML private ComboBox<String> activitiesDropDown;
+  @FXML private ComboBox<String> citizenIdDropDown;
+  @FXML private TextField pointsField;
+  @FXML private DatePicker datePoints;
+  @FXML private Label errorLabel;
+  @FXML private TextField searchBarAvailablePoints;
+  @FXML private TextField searchBarGreenPoints;
+  @FXML private Label errorLabel1;
+  @FXML private Label errorLabel2;
 
   private final ObservableList<Activity> activities = FXCollections.observableArrayList();
   private final ObservableList<Activity> residentActivities = FXCollections.observableArrayList();
@@ -60,7 +51,6 @@ public class AddPointsController {
 
   @FXML
   private void initialize() {
-
     greenActivityTable.setCellValueFactory(new PropertyValueFactory<>("activity"));
     pointsPerActivityTable.setCellValueFactory(new PropertyValueFactory<>("pointsPerActivity"));
     numberOfAvailableActivities.setCellFactory(col -> new TableCell<>() {
@@ -87,21 +77,19 @@ public class AddPointsController {
 
     ObservableList<String> activityNames = FXCollections.observableArrayList();
     activitiesDropDown.setItems(activityNames);
-
     activities.addListener((ListChangeListener<Activity>) change -> {
       activityNames.clear();
       for (Activity a : activities) activityNames.add(a.getActivity());
     });
 
     activitiesDropDown.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-      if (newVal == null) {
-        pointsField.clear();
-        return;
-      }
-      for (Activity a : activities) {
-        if (a.getActivity().equals(newVal)) {
-          pointsField.setText(String.valueOf(a.getPointsPerActivity()));
-          break;
+      if (newVal == null) pointsField.clear();
+      else {
+        for (Activity a : activities) {
+          if (a.getActivity().equals(newVal)) {
+            pointsField.setText(String.valueOf(a.getPointsPerActivity()));
+            break;
+          }
         }
       }
     });
@@ -118,6 +106,29 @@ public class AddPointsController {
     citizenIdDropDown.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
       if (!newVal.matches("\\d*")) citizenIdDropDown.getEditor().setText(newVal.replaceAll("\\D", ""));
     });
+
+    setupSearchBars();
+  }
+
+  private void setupSearchBars() {
+    FilteredList<Activity> filteredAvailable = new FilteredList<>(activities, p -> true);
+    searchBarAvailablePoints.textProperty().addListener((obs, oldVal, newVal) -> {
+      String filter = newVal.toLowerCase().trim();
+      filteredAvailable.setPredicate(a -> filter.isEmpty() || a.getActivity().toLowerCase().contains(filter));
+    });
+    SortedList<Activity> sortedAvailable = new SortedList<>(filteredAvailable);
+    sortedAvailable.comparatorProperty().bind(pointsTable.comparatorProperty());
+    pointsTable.setItems(sortedAvailable);
+
+    FilteredList<Activity> filteredResident = new FilteredList<>(residentActivities, p -> true);
+    searchBarGreenPoints.textProperty().addListener((obs, oldVal, newVal) -> {
+      String filter = newVal.toLowerCase().trim();
+      filteredResident.setPredicate(a -> filter.isEmpty() || a.getActivity().toLowerCase().contains(filter)
+          || a.getResidentId().toLowerCase().contains(filter));
+    });
+    SortedList<Activity> sortedResident = new SortedList<>(filteredResident);
+    sortedResident.comparatorProperty().bind(pointsResidentTable.comparatorProperty());
+    pointsResidentTable.setItems(sortedResident);
   }
 
   private void loadCitizensFromJson() {
@@ -171,7 +182,11 @@ public class AddPointsController {
     if (pointsText == null || pointsText.isEmpty()) { showError("Points cannot be empty!"); return; }
     if (date == null || date.isEmpty()) { showError("Date cannot be empty!"); return; }
 
-    Activity activity = new Activity(citizenId, activityName, pointsText, date);
+    int points;
+    try { points = Integer.parseInt(pointsText); }
+    catch (NumberFormatException e) { showError("Points must be a number!"); return; }
+
+    Activity activity = new Activity(citizenId, activityName, points, date);
     residentActivities.add(activity);
     handleResetFields();
   }
@@ -188,6 +203,9 @@ public class AddPointsController {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
       mapper.writeValue(pointsFile, activities);
+      errorLabel2.setVisible(true);
+      errorLabel2.setText("Uploaded to JSON successfully!");
+      errorLabel2.setStyle("-fx-text-fill: green");
     } catch (IOException e) { e.printStackTrace(); }
   }
 
@@ -196,7 +214,11 @@ public class AddPointsController {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
       mapper.writeValue(actualPointsFile, residentActivities);
-    } catch (IOException e) { e.printStackTrace(); }
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("Uploaded to JSON successfully!");
+      errorLabel1.setStyle("-fx-text-fill: green");
+    } catch (IOException e) {
+      System.out.println("Need to select something");; }
   }
 
   @FXML
@@ -209,17 +231,27 @@ public class AddPointsController {
       controller.setPointsController(this);
       stage.setTitle("Add Green Activity");
       stage.show();
-    } catch (IOException e) { e.printStackTrace(); }
+    } catch (IOException e) {
+      System.out.println("Error");; }
   }
 
   public void handleDeleteActivity() {
     Activity selectedActivity = pointsTable.getSelectionModel().getSelectedItem();
-    if (selectedActivity != null) activities.remove(selectedActivity);
+    if (selectedActivity == null){
+      errorLabel2.setVisible(true);
+      errorLabel2.setText("You need to select a activity!");
+      errorLabel2.setStyle("-fx-text-fill: red");
+    }else{ activities.remove(selectedActivity);
+    errorLabel2.setVisible(false);}
   }
 
   public void handleEditActivity() {
     Activity selectedResidentActivity = pointsResidentTable.getSelectionModel().getSelectedItem();
-    if (selectedResidentActivity == null) return;
+    if (selectedResidentActivity == null) {
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("You need to select one of the users!");
+      errorLabel1.setStyle("-fx-text-fill: red");
+    }
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/PointsPage/EditPoints.fxml"));
       Parent root = fxmlLoader.load();
@@ -230,15 +262,22 @@ public class AddPointsController {
       stage.setTitle("Edit Points");
       stage.setScene(new Scene(root));
       stage.show();
-    } catch (IOException e) { throw new RuntimeException(e); }
+    } catch (IOException e) {
+      System.out.println("Normal Error");; }
   }
 
   public void handleDeleteResidentActivity() {
     Activity selectedActivity = pointsResidentTable.getSelectionModel().getSelectedItem();
-    if (selectedActivity != null) residentActivities.remove(selectedActivity);
-  }
+    if (selectedActivity == null){
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("You need to select one of the users!");
+      errorLabel1.setStyle("-fx-text-fill: red");
+
+    } else{residentActivities.remove(selectedActivity);
+    errorLabel1.setVisible(false);}}
 
   public void addActivity(Activity activity) {
     activities.add(activity);
   }
+
 }

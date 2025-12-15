@@ -1,128 +1,101 @@
-[
-  {
-    "residentName": "Daniela Smith",
-    "goodToOffer": "Chain oil",
-    "price": 6,
-    "date": "2025-12-09"
-  },
-  {
-    "residentName": "Kristina Povazska",
-    "goodToOffer": "Strawberry jam",
-    "price": 4,
-    "date": "2025-12-10"
-  },
-  {
-    "residentName": "Taylor Swift",
-    "goodToOffer": "Reusable cup",
-    "price": 8,
-    "date": "2025-12-11"
-  },
-  {
-    "residentName": "Connor Mcgregor",
-    "goodToOffer": "Tool set",
-    "price": 5,
-    "date": "2025-12-12"
-  },
-  {
-    "residentName": "Adam Horelican",
-    "goodToOffer": "Screen protector",
-    "price": 3,
-    "date": "2025-12-13"
-  },
-  {
-    "residentName": "Emma Johnson",
-    "goodToOffer": "Basil plant",
-    "price": 6,
-    "date": "2025-12-14"
-  },
-  {
-    "residentName": "Liam Williams",
-    "goodToOffer": "Bike tube",
-    "price": 7,
-    "date": "2025-12-15"
-  },
-  {
-    "residentName": "Olivia Brown",
-    "goodToOffer": "Winter gloves",
-    "price": 5,
-    "date": "2025-12-16"
-  },
-  {
-    "residentName": "Noah Davis",
-    "goodToOffer": "Monstera cutting",
-    "price": 4,
-    "date": "2025-12-17"
-  },
-  {
-    "residentName": "Ava Miller",
-    "goodToOffer": "Clothing repair",
-    "price": 9,
-    "date": "2025-12-18"
-  },
-  {
-    "residentName": "Ethan Wilson",
-    "goodToOffer": "Book bundle",
-    "price": 6,
-    "date": "2025-12-19"
-  },
-  {
-    "residentName": "Sophia Moore",
-    "goodToOffer": "Cookie box",
-    "price": 5,
-    "date": "2025-12-20"
-  },
-  {
-    "residentName": "Mason Taylor",
-    "goodToOffer": "Window cleaning",
-    "price": 12,
-    "date": "2025-12-21"
-  },
-  {
-    "residentName": "Isabella Anderson",
-    "goodToOffer": "Shopping bags",
-    "price": 7,
-    "date": "2025-12-22"
-  },
-  {
-    "residentName": "James Thomas",
-    "goodToOffer": "Brake adjustment",
-    "price": 15,
-    "date": "2025-12-23"
-  },
-  {
-    "residentName": "Mia Jackson",
-    "goodToOffer": "Dog walking",
-    "price": 10,
-    "date": "2025-12-24"
-  },
-  {
-    "residentName": "Benjamin White",
-    "goodToOffer": "Knife sharpening",
-    "price": 8,
-    "date": "2025-12-25"
-  },
-  {
-    "residentName": "Charlotte Harris",
-    "goodToOffer": "Bulb replacement",
-    "price": 6,
-    "date": "2025-12-26"
-  },
-  {
-    "residentName": "Henry Martin",
-    "goodToOffer": "USB-C cable",
-    "price": 5,
-    "date": "2025-12-27"
-  },
-  {
-    "residentName": "Amelia Thompson",
-    "goodToOffer": "Plant repotting",
-    "price": 9,
-    "date": "2025-12-28"
-  },
-  {
-    "residentName": "Daniela Smith",
-    "goodToOffer": "Glass container",
-    "price": 7,
-    "date": "2025-12-29"
-  }
-]
+[ {
+  "residentName" : "Daniela Smith",
+  "goodToOffer" : "Chain oil",
+  "price" : 6,
+  "date" : "2025-12-09"
+}, {
+  "residentName" : "Kristina Povazska",
+  "goodToOffer" : "Strawberry jam",
+  "price" : 4,
+  "date" : "2025-12-10"
+}, {
+  "residentName" : "Taylor Swift",
+  "goodToOffer" : "Reusable cup",
+  "price" : 8,
+  "date" : "2025-12-11"
+}, {
+  "residentName" : "Connor Mcgregor",
+  "goodToOffer" : "Tool set",
+  "price" : 5,
+  "date" : "2025-12-12"
+}, {
+  "residentName" : "Adam Horelican",
+  "goodToOffer" : "Screen protector",
+  "price" : 3,
+  "date" : "2025-12-13"
+}, {
+  "residentName" : "Emma Johnson",
+  "goodToOffer" : "Basil plant",
+  "price" : 6,
+  "date" : "2025-12-14"
+}, {
+  "residentName" : "Liam Williams",
+  "goodToOffer" : "Bike tube",
+  "price" : 7,
+  "date" : "2025-12-15"
+}, {
+  "residentName" : "Olivia Brown",
+  "goodToOffer" : "Winter gloves",
+  "price" : 5,
+  "date" : "2025-12-16"
+}, {
+  "residentName" : "Noah Davis",
+  "goodToOffer" : "Monstera cutting",
+  "price" : 4,
+  "date" : "2025-12-17"
+}, {
+  "residentName" : "Ava Miller",
+  "goodToOffer" : "Clothing repair",
+  "price" : 9,
+  "date" : "2025-12-18"
+}, {
+  "residentName" : "Ethan Wilson",
+  "goodToOffer" : "Book bundle",
+  "price" : 6,
+  "date" : "2025-12-19"
+}, {
+  "residentName" : "Sophia Moore",
+  "goodToOffer" : "Cookie box",
+  "price" : 5,
+  "date" : "2025-12-20"
+}, {
+  "residentName" : "Mason Taylor",
+  "goodToOffer" : "Window cleaning",
+  "price" : 12,
+  "date" : "2025-12-21"
+}, {
+  "residentName" : "Isabella Anderson",
+  "goodToOffer" : "Shopping bags",
+  "price" : 7,
+  "date" : "2025-12-22"
+}, {
+  "residentName" : "James Thomas",
+  "goodToOffer" : "Brake adjustment",
+  "price" : 15,
+  "date" : "2025-12-23"
+}, {
+  "residentName" : "Mia Jackson",
+  "goodToOffer" : "Dog walking",
+  "price" : 10,
+  "date" : "2025-12-24"
+}, {
+  "residentName" : "Benjamin White",
+  "goodToOffer" : "Knife sharpening",
+  "price" : 8,
+  "date" : "2025-12-25"
+}, {
+  "residentName" : "Charlotte Harris",
+  "goodToOffer" : "Bulb replacement",
+  "price" : 6,
+  "date" : "2025-12-26"
+}, {
+  "residentName" : "Henry Martin",
+  "goodToOffer" : "USB-C cable",
+  "price" : 5,
+  "date" : "2025-12-27"
+}, {
+  "residentName" : "Daniela Smith",
+  "goodToOffer" : "Glass container",
+  "price" : 7,
+  "date" : "2025-12-29"
+} ]

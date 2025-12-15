@@ -23,6 +23,7 @@ public class ClovervilleApplication extends Application {
     Image image = new Image(Objects.requireNonNull(
         ClovervilleApplication.class.getResourceAsStream("/images/logo.png"))
     );
+    stage.setResizable(false);
     stage.getIcons().add(image);
     stage.show();
   }

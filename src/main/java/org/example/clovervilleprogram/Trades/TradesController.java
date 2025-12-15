@@ -19,12 +19,9 @@ import javafx.stage.Stage;
 import org.example.clovervilleprogram.Users.User;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 
-public class TradesController
-{
-
+public class TradesController {
 
   @FXML private Button addTrade;
   @FXML private Button resetFields;
@@ -35,35 +32,62 @@ public class TradesController
   @FXML private TextField priceOfProduct;
   @FXML private TextField goodToOffer;
   @FXML private DatePicker dateOfActivity;
-
+  @FXML private TextField searchBar;
+  @FXML private Label errorLabel;
+  @FXML private Label errorLabel1;
   private final ObservableList<Trades> tradesList = FXCollections.observableArrayList();
-
   private final File tradesFile = new File("trades.json");
   private final File usersFile = new File("users.json");
 
-  public void initialize(){
+  public void initialize() {
     loadCitizensFromJson();
     loadTradesFromJson();
+    setupSearchBar();
+  }
+
+  private void setupSearchBar() {
+    searchBar.textProperty().addListener((obs, oldVal, newVal) -> updateVBoxFilter(newVal));
+  }
+
+  private void updateVBoxFilter(String filterText) {
+    vBox.getChildren().clear();
+    String filter = filterText.toLowerCase().trim();
+    for (Trades trade : tradesList) {
+      if (filter.isEmpty() || trade.getResidentName().toLowerCase().contains(filter)
+          || trade.getGoodToOffer().toLowerCase().contains(filter)) {
+        addTradeToVBox(trade);
+      }
+    }
   }
 
   @FXML
   private void handleAddTrade() {
-    if (residentName.getValue() == null ||
-        goodToOffer.getText().isEmpty() ||
-        priceOfProduct.getText().isEmpty()) {
+    if (residentName.getValue() == null || goodToOffer.getText().isEmpty() || priceOfProduct.getText().isEmpty()) {
+      errorLabel.setVisible(true);
+      errorLabel.setText("You need to fill all the fields!");
+      errorLabel.setStyle("-fx-text-fill: red");
+      return;
+    }
+
+    int price;
+    try {
+      price = Integer.parseInt(priceOfProduct.getText());
+    } catch (NumberFormatException e) {
       return;
     }
 
     Trades trade = new Trades(
         residentName.getValue(),
         goodToOffer.getText(),
-        Integer.parseInt(priceOfProduct.getText()),
-        dateOfActivity.getValue().toString()
+        price,
+        dateOfActivity.getValue() != null ? dateOfActivity.getValue().toString() : ""
     );
 
     tradesList.add(trade);
-    addTradeToVBox(trade);
+    updateVBoxFilter(searchBar.getText());
+    clearFields();
   }
+
   private void addTradeToVBox(Trades trade) {
     Label owner = new Label("Owner: " + trade.getResidentName());
     Label product = new Label(trade.getGoodToOffer());
@@ -87,93 +111,90 @@ public class TradesController
     accept.getStyleClass().add("trade-accept");
     cancel.getStyleClass().add("trade-cancel");
 
-    ToolBar toolBar = new ToolBar(
-        owner,
-        leftSpacer,
-        centerBox,
-        rightSpacer,
-        accept,
-        cancel
-    );
+    ToolBar toolBar = new ToolBar(owner, leftSpacer, centerBox, rightSpacer, accept, cancel);
     toolBar.setStyle("-fx-background-color: #CBEACB ; -fx-border-color: #44E151; -fx-min-height: 31px; -fx-min-width: 441px");
 
-    accept.setOnAction(e -> {System.out.println("Accepted: " + trade);
-      try
-      {
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource(
-            "/org/example/clovervilleprogram/TradesPage/ConfirmTrades.fxml"));
+    accept.setOnAction(e -> {
+      try {
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/TradesPage/ConfirmTrades.fxml"));
         Parent root = fxmlloader.load();
 
         ConfirmTradesController controller = fxmlloader.getController();
-
         controller.setTrade(trade);
         controller.setOnTradeConfirmed(t -> {
           tradesList.remove(t);
-          vBox.getChildren().remove(toolBar);
+          updateVBoxFilter(searchBar.getText());
         });
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Accept the trade");
         stage.show();
-      }
-      catch (Exception ex)
-      {
+      } catch (Exception ex) {
         throw new RuntimeException(ex);
       }
     });
-    cancel.setOnAction(e -> {
-      vBox.getChildren().remove(toolBar);
-      tradesList.remove(trade);
-    });
 
+    cancel.setOnAction(e -> {
+      tradesList.remove(trade);
+      updateVBoxFilter(searchBar.getText());
+    });
 
     vBox.getChildren().add(toolBar);
   }
 
-  @FXML private void handleResetFields(){
-
+  @FXML
+  private void handleResetFields() {
+    residentName.getSelectionModel().clearSelection();
+    goodToOffer.clear();
+    priceOfProduct.clear();
+    dateOfActivity.setValue(null);
+    errorLabel.setVisible(false);
   }
-  public void handleExportButton(){
-    try{
+
+  public void handleExportButton() {
+    try {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
       mapper.writeValue(tradesFile, tradesList);
-  } catch (Exception e){
-    e.printStackTrace();
-    }
-  }
-  public void loadTradesFromJson(){
-    ObjectMapper mapper = new ObjectMapper();
-
-    if(tradesFile.exists()){
-      try{
-        List<Trades> trades = mapper.readValue(tradesFile, new TypeReference<List<Trades>>() {});
-        tradesList.setAll(trades);
-        for (Trades trade : tradesList) {
-          addTradeToVBox(trade);
-        }
-      } catch (Exception e){
-        e.printStackTrace();
-      }
-    }
-  }
-  public void loadCitizensFromJson(){
-    if(!usersFile.exists()) return;
-    try
-    {
-      ObjectMapper mapper = new ObjectMapper();
-      List<User> users = mapper.readValue(usersFile, new TypeReference<List<User>>() {});
-
-      ObservableList<String> names = FXCollections.observableArrayList();
-      for(User u : users){
-        names.add(u.getFullName());
-      }
-      residentName.setItems(names);
-    } catch (Exception e){
+      errorLabel1.setVisible(true);
+      errorLabel1.setText("Exported to JSON successfully!");
+      errorLabel1.setStyle("-fx-text-fill: green");
+    } catch (Exception e) {
       e.printStackTrace();
     }
+  }
 
+  public void loadTradesFromJson() {
+    if (!tradesFile.exists()) return;
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      List<Trades> trades = mapper.readValue(tradesFile, new TypeReference<List<Trades>>() {});
+      tradesList.setAll(trades);
+      updateVBoxFilter(searchBar.getText());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void loadCitizensFromJson() {
+    if (!usersFile.exists()) return;
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      List<User> users = mapper.readValue(usersFile, new TypeReference<List<User>>() {});
+      ObservableList<String> names = FXCollections.observableArrayList();
+      for (User u : users) names.add(u.getFullName());
+      residentName.setItems(names);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void clearFields() {
+    residentName.getSelectionModel().clearSelection();
+    goodToOffer.clear();
+    priceOfProduct.clear();
+    dateOfActivity.setValue(null);
 
   }
 }
