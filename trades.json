@@ -18,4 +18,9 @@
   "goodToOffer" : "Glass container",
   "price" : 7,
   "date" : "2025-12-29"
+}, {
+  "residentName" : "Adam Horelican",
+  "goodToOffer" : "car",
+  "price" : 100,
+  "date" : "2025-12-23"
 } ]
