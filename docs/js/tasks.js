@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/trades.json')
+  fetch('../trades.json')
     .then(response => response.json())
     .then(data => {
       const taskGrid = document.querySelector(".tasks-grid");
