@@ -43,6 +43,8 @@ public class TasksController {
   private final File usersFile = new File("users.json");
   private final File userPointsFile = new File("userPoints.json");
 
+
+  // Initializing tabs and counting the rows
   @FXML
   public void initialize() {
     fullName.setCellValueFactory(data -> data.getValue().residentIdProperty());
@@ -59,11 +61,15 @@ public class TasksController {
 
     individualTasksTable.setItems(tasksLists);
 
+    // Calling function that loads data into the table
+
     loadTasksFromJson();
     loadCitizensFromJson();
     setupSearchBar();
   }
 
+
+  // Logic for the search bar
   private void setupSearchBar() {
     FilteredList<Tasks> filteredList = new FilteredList<>(tasksLists, p -> true);
     searchBar.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -77,6 +83,8 @@ public class TasksController {
     individualTasksTable.setItems(sortedList);
   }
 
+
+  // Gathering information from Bob about new data
   @FXML
   public void handleAddActivity() {
     if (residentId.getValue() == null ||
@@ -111,6 +119,7 @@ public class TasksController {
     clearFields();
   }
 
+  //Deleting data from the table by selecting the row
   @FXML
   public void handleDeleteActivity() {
     Tasks selected = individualTasksTable.getSelectionModel().getSelectedItem();
@@ -121,6 +130,8 @@ public class TasksController {
     } else  tasksLists.remove(selected);
   }
 
+
+  //Resetting the input fields so they are clear
   @FXML
   public void handleResetFields() {
     individualActivity.clear();
@@ -130,6 +141,7 @@ public class TasksController {
     errorLabel.setVisible(false);
   }
 
+  //Editing rows by selecting and opening new tabs with selected data
   @FXML
   public void handleEditTasks() {
     Tasks selectedTask = individualTasksTable.getSelectionModel().getSelectedItem();
@@ -156,6 +168,7 @@ public class TasksController {
     }
   }
 
+  //Exporting data into JSON File
   @FXML
   public void handleExportButton() {
     try {
@@ -176,6 +189,8 @@ public class TasksController {
     }
   }
 
+
+  // function for loading(tasks) data from JSON
   private void loadTasksFromJson() {
     if (!tasksFile.exists()) return;
     try {
@@ -187,6 +202,7 @@ public class TasksController {
     }
   }
 
+  // function for loading(Citizens) data from JSON
   private void loadCitizensFromJson() {
     if (!usersFile.exists()) return;
     try {
@@ -200,10 +216,13 @@ public class TasksController {
     }
   }
 
+  //refreshing the table so everytime new data is added it appears without reloading the program
   public void refreshTable() {
     individualTasksTable.refresh();
   }
 
+
+  // Once the info is added the fields are clear so Bob can add new information without having to delete the old one
   private void clearFields() {
     individualActivity.clear();
     pointsPerActivity.clear();

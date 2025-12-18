@@ -7,6 +7,8 @@ import javafx.beans.property.StringProperty;
 
 public class Tasks {
 
+
+  
   private final StringProperty individualActivity = new SimpleStringProperty();
   private final StringProperty residentId = new SimpleStringProperty();
   private final IntegerProperty pointsPerActivity = new SimpleIntegerProperty();
