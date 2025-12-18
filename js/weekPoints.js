@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("info-block").classList.toggle("is-collapsed");
   });
 
-  fetch('/actualPoints.json')
+  fetch('./actualPoints.json')
     .then(response => response.json()) // Convert the HTTP response into JS data
     .then(data => {
       const today = new Date(); // Current date

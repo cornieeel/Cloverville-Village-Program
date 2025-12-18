@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  fetch('/actualPoints.json')
+  fetch('./actualPoints.json')
     .then(response => response.json()) // Convert the HTTP response into JS data
     .then(data => {
       let greenPointsTotal = 0; // We’ll add up all activity points into this number
