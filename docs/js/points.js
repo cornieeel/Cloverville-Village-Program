@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const MAX_POINTS = 1500;
 
-  fetch('./actualPoints.json')
+  fetch('/actualPoints.json')
     .then(response => response.json())
     .then(data => {
       let greenPointsTotal = 0;
