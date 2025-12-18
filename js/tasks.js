@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
             />
           </div>
           <div class="task-body">
-            <h2 class="task-title">${item.goodsToOffer}</h2>
-            <p class="task-owner">Owner: ${item.fullName}</p>
+            <h2 class="task-title">${item.goodToOffer}</h2>
+            <p class="task-owner">Owner: ${item.residentName}</p>
             <p class="task-points">${item.price} points</p>
           </div>
         `;
