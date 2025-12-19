@@ -21,34 +21,62 @@ import org.example.clovervilleprogram.Users.User;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Controller for managing trades between users.
+ * Handles adding trades, filtering trades, exporting to JSON,
+ * and displaying trade options with accept/cancel functionality.
+ */
 public class TradesController {
 
+  // Buttons for adding a trade and resetting input fields
   @FXML private Button addTrade;
   @FXML private Button resetFields;
+
+  // Labels for error messages and "no trades" notification
   @FXML private Label noTradesAvailable;
-  @FXML private ScrollPane scrollPane;
-  @FXML private VBox vBox;
-  @FXML private ComboBox<String> residentName;
-  @FXML private TextField priceOfProduct;
-  @FXML private TextField goodToOffer;
-  @FXML private DatePicker dateOfActivity;
-  @FXML private TextField searchBar;
   @FXML private Label errorLabel;
   @FXML private Label errorLabel1;
+
+  // ScrollPane and VBox for displaying trades dynamically
+  @FXML private ScrollPane scrollPane;
+  @FXML private VBox vBox;
+
+  // Input fields for creating a trade
+  @FXML private ComboBox<String> residentName; // Seller name
+  @FXML private TextField priceOfProduct;      // Trade price
+  @FXML private TextField goodToOffer;         // Item to offer
+  @FXML private DatePicker dateOfActivity;     // Trade date
+  @FXML private TextField searchBar;           // Search/filter trades
+
+  // Observable list to store all trades
   private final ObservableList<Trades> tradesList = FXCollections.observableArrayList();
+
+  // JSON files for trades and users
   private final File tradesFile = new File("trades.json");
   private final File usersFile = new File("users.json");
 
+  /**
+   * Initializes the controller by loading users and trades from JSON,
+   * and sets up the search/filter functionality.
+   */
   public void initialize() {
     loadCitizensFromJson();
     loadTradesFromJson();
     setupSearchBar();
   }
 
+  /**
+   * Sets up listener for the search bar to filter trades dynamically.
+   */
   private void setupSearchBar() {
     searchBar.textProperty().addListener((obs, oldVal, newVal) -> updateVBoxFilter(newVal));
   }
 
+  /**
+   * Updates the VBox to display only trades matching the filter text.
+   *
+   * @param filterText text entered in the search bar
+   */
   private void updateVBoxFilter(String filterText) {
     vBox.getChildren().clear();
     String filter = filterText.toLowerCase().trim();
@@ -60,6 +88,10 @@ public class TradesController {
     }
   }
 
+  /**
+   * Handles adding a new trade from input fields.
+   * Validates that all fields are filled and adds trade to list.
+   */
   @FXML
   private void handleAddTrade() {
     if (residentName.getValue() == null || goodToOffer.getText().isEmpty() || priceOfProduct.getText().isEmpty()) {
@@ -88,6 +120,12 @@ public class TradesController {
     clearFields();
   }
 
+  /**
+   * Creates a visual representation of a trade in the VBox with
+   * accept and cancel buttons.
+   *
+   * @param trade the trade to display
+   */
   private void addTradeToVBox(Trades trade) {
     Label owner = new Label("Owner: " + trade.getResidentName());
     Label product = new Label(trade.getGoodToOffer());
@@ -96,24 +134,28 @@ public class TradesController {
     Button accept = new Button("✔");
     Button cancel = new Button("✖");
 
+    // Spacers to arrange elements in HBox
     Region leftSpacer = new Region();
     HBox.setHgrow(leftSpacer, Priority.ALWAYS);
-
     Region rightSpacer = new Region();
     HBox.setHgrow(rightSpacer, Priority.ALWAYS);
 
+    // Center box to hold product and price
     HBox centerBox = new HBox(7, product, price);
     centerBox.setAlignment(Pos.CENTER);
 
+    // Add CSS classes for styling
     owner.getStyleClass().add("trade-owner");
     product.getStyleClass().add("trade-product");
     price.getStyleClass().add("trade-price");
     accept.getStyleClass().add("trade-accept");
     cancel.getStyleClass().add("trade-cancel");
 
+    // Create toolbar containing the trade information and buttons
     ToolBar toolBar = new ToolBar(owner, leftSpacer, centerBox, rightSpacer, accept, cancel);
     toolBar.setStyle("-fx-background-color: #CBEACB ; -fx-border-color: #44E151; -fx-min-height: 31px; -fx-min-width: 441px");
 
+    // Accept button opens a confirmation window
     accept.setOnAction(e -> {
       try {
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/org/example/clovervilleprogram/TradesPage/ConfirmTrades.fxml"));
@@ -135,14 +177,19 @@ public class TradesController {
       }
     });
 
+    // Cancel button removes the trade immediately
     cancel.setOnAction(e -> {
       tradesList.remove(trade);
       updateVBoxFilter(searchBar.getText());
     });
 
+    // Add the toolbar to the VBox
     vBox.getChildren().add(toolBar);
   }
 
+  /**
+   * Resets all input fields and hides error label.
+   */
   @FXML
   private void handleResetFields() {
     residentName.getSelectionModel().clearSelection();
@@ -152,6 +199,9 @@ public class TradesController {
     errorLabel.setVisible(false);
   }
 
+  /**
+   * Exports current trades to trades.json file.
+   */
   public void handleExportButton() {
     try {
       ObjectMapper mapper = new ObjectMapper();
@@ -165,6 +215,9 @@ public class TradesController {
     }
   }
 
+  /**
+   * Loads trades from trades.json into tradesList.
+   */
   public void loadTradesFromJson() {
     if (!tradesFile.exists()) return;
     try {
@@ -177,6 +230,9 @@ public class TradesController {
     }
   }
 
+  /**
+   * Loads users from users.json into the residentName ComboBox.
+   */
   public void loadCitizensFromJson() {
     if (!usersFile.exists()) return;
     try {
@@ -190,11 +246,13 @@ public class TradesController {
     }
   }
 
+  /**
+   * Clears the input fields after adding a trade.
+   */
   private void clearFields() {
     residentName.getSelectionModel().clearSelection();
     goodToOffer.clear();
     priceOfProduct.clear();
     dateOfActivity.setValue(null);
-
   }
 }

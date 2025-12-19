@@ -21,8 +21,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller for managing individual tasks.
+ * Handles adding, editing, deleting, searching, and exporting task data.
+ */
 public class TasksController {
 
+  // Input fields and controls
   @FXML private ComboBox<String> residentId;
   @FXML private DatePicker dateOfActivity;
   @FXML private TextField individualActivity;
@@ -31,26 +36,29 @@ public class TasksController {
   @FXML private Label errorLabel;
   @FXML private Label errorLabel1;
 
+  // Table and table columns
   @FXML private TableView<Tasks> individualTasksTable;
   @FXML private TableColumn<Tasks, Number> numberTable;
   @FXML private TableColumn<Tasks, String> fullName;
   @FXML private TableColumn<Tasks, String> individualTask;
   @FXML private TableColumn<Tasks, Number> pointsPerActivityTable;
 
+  // Observable list holding all tasks
   private final ObservableList<Tasks> tasksLists = FXCollections.observableArrayList();
 
+  // JSON files for persistence
   private final File tasksFile = new File("tasks.json");
   private final File usersFile = new File("users.json");
   private final File userPointsFile = new File("userPoints.json");
 
-
-  // Initializing tabs and counting the rows
+  // Initializing table columns, loading data, and setting up search
   @FXML
   public void initialize() {
     fullName.setCellValueFactory(data -> data.getValue().residentIdProperty());
     individualTask.setCellValueFactory(data -> data.getValue().individualActivityProperty());
     pointsPerActivityTable.setCellValueFactory(data -> data.getValue().pointsPerActivityProperty());
 
+    // Automatically numbers table rows
     numberTable.setCellFactory(col -> new TableCell<>() {
       @Override
       protected void updateItem(Number item, boolean empty) {
@@ -61,15 +69,13 @@ public class TasksController {
 
     individualTasksTable.setItems(tasksLists);
 
-    // Calling function that loads data into the table
-
+    // Load data and initialize features
     loadTasksFromJson();
     loadCitizensFromJson();
     setupSearchBar();
   }
 
-
-  // Logic for the search bar
+  // Logic for filtering and sorting tasks using the search bar
   private void setupSearchBar() {
     FilteredList<Tasks> filteredList = new FilteredList<>(tasksLists, p -> true);
     searchBar.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -83,8 +89,7 @@ public class TasksController {
     individualTasksTable.setItems(sortedList);
   }
 
-
-  // Gathering information from Bob about new data
+  // Adds a new activity based on user input
   @FXML
   public void handleAddActivity() {
     if (residentId.getValue() == null ||
@@ -108,6 +113,7 @@ public class TasksController {
       return;
     }
 
+    // Create and add a new task
     Tasks task = new Tasks(
         individualActivity.getText(),
         residentId.getValue(),
@@ -119,7 +125,7 @@ public class TasksController {
     clearFields();
   }
 
-  //Deleting data from the table by selecting the row
+  // Deletes the selected activity from the table
   @FXML
   public void handleDeleteActivity() {
     Tasks selected = individualTasksTable.getSelectionModel().getSelectedItem();
@@ -130,8 +136,7 @@ public class TasksController {
     } else  tasksLists.remove(selected);
   }
 
-
-  //Resetting the input fields so they are clear
+  // Resets all input fields
   @FXML
   public void handleResetFields() {
     individualActivity.clear();
@@ -141,15 +146,16 @@ public class TasksController {
     errorLabel.setVisible(false);
   }
 
-  //Editing rows by selecting and opening new tabs with selected data
+  // Opens a new window to edit the selected task
   @FXML
   public void handleEditTasks() {
     Tasks selectedTask = individualTasksTable.getSelectionModel().getSelectedItem();
     if (selectedTask == null){
       errorLabel1.setVisible(true);
-    errorLabel1.setText("You need to select a activity!");
-    errorLabel1.setStyle("-fx-text-fill: red");
-      return;}
+      errorLabel1.setText("You need to select a activity!");
+      errorLabel1.setStyle("-fx-text-fill: red");
+      return;
+    }
 
     try {
       FXMLLoader loader = new FXMLLoader(
@@ -168,7 +174,7 @@ public class TasksController {
     }
   }
 
-  //Exporting data into JSON File
+  // Exports tasks and user points data to JSON files
   @FXML
   public void handleExportButton() {
     try {
@@ -179,6 +185,7 @@ public class TasksController {
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
       mapper.writeValue(tasksFile, tasksLists);
 
+      // Aggregate points per user
       Map<String, Integer> pointsMap = new HashMap<>();
       for (Tasks task : tasksLists) {
         pointsMap.merge(task.getResidentId(), task.getPointsPerActivity(), Integer::sum);
@@ -189,8 +196,7 @@ public class TasksController {
     }
   }
 
-
-  // function for loading(tasks) data from JSON
+  // Loads tasks from JSON file into the table
   private void loadTasksFromJson() {
     if (!tasksFile.exists()) return;
     try {
@@ -202,7 +208,7 @@ public class TasksController {
     }
   }
 
-  // function for loading(Citizens) data from JSON
+  // Loads citizen names from JSON file into the ComboBox
   private void loadCitizensFromJson() {
     if (!usersFile.exists()) return;
     try {
@@ -216,13 +222,12 @@ public class TasksController {
     }
   }
 
-  //refreshing the table so everytime new data is added it appears without reloading the program
+  // Refreshes the table to show updated data
   public void refreshTable() {
     individualTasksTable.refresh();
   }
 
-
-  // Once the info is added the fields are clear so Bob can add new information without having to delete the old one
+  // Clears input fields after adding a task
   private void clearFields() {
     individualActivity.clear();
     pointsPerActivity.clear();

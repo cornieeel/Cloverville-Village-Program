@@ -21,11 +21,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller for managing points and green activities.
+ * Handles available activities, resident activities, searching, editing,
+ * deleting, and exporting data to JSON files.
+ */
 public class AddPointsController {
 
+  // Tables and columns for available activities
   @FXML private TableView<Activity> pointsTable;
   @FXML private TableColumn<Activity, String> greenActivityTable;
   @FXML private TableColumn<Activity, Number> pointsPerActivityTable;
+
+  // Tables and columns for resident activities
   @FXML private TableView<Activity> pointsResidentTable;
   @FXML private TableColumn<Activity, String> residentIDpointsTable;
   @FXML private TableColumn<Activity, String> greenActivityResidentTable;
@@ -33,26 +41,39 @@ public class AddPointsController {
   @FXML private TableColumn<Activity, Number> numberOfActivities;
   @FXML private TableColumn<Activity, Number> numberOfAvailableActivities;
   @FXML private TableColumn<Activity, Number> dateOfActivity;
+
+  // Input controls
   @FXML private ComboBox<String> activitiesDropDown;
   @FXML private ComboBox<String> citizenIdDropDown;
   @FXML private TextField pointsField;
   @FXML private DatePicker datePoints;
+
+  // Labels and search bars for feedback and filtering
   @FXML private Label errorLabel;
   @FXML private TextField searchBarAvailablePoints;
   @FXML private TextField searchBarGreenPoints;
   @FXML private Label errorLabel1;
   @FXML private Label errorLabel2;
 
+  // Observable lists for activities and resident activities
   private final ObservableList<Activity> activities = FXCollections.observableArrayList();
   private final ObservableList<Activity> residentActivities = FXCollections.observableArrayList();
+
+  // JSON files for persistence
   private final File usersFile = new File("users.json");
   private final File pointsFile = new File("points.json");
   private final File actualPointsFile = new File("actualPoints.json");
 
+  /**
+   * Initializes tables, dropdowns, listeners, loads JSON data,
+   * and sets up search bars.
+   */
   @FXML
   private void initialize() {
     greenActivityTable.setCellValueFactory(new PropertyValueFactory<>("activity"));
     pointsPerActivityTable.setCellValueFactory(new PropertyValueFactory<>("pointsPerActivity"));
+
+    // Auto-numbering rows for available activities table
     numberOfAvailableActivities.setCellFactory(col -> new TableCell<>() {
       @Override
       protected void updateItem(Number item, boolean empty) {
@@ -62,10 +83,13 @@ public class AddPointsController {
     });
     pointsTable.setItems(activities);
 
+    // Setting up resident activities table columns
     residentIDpointsTable.setCellValueFactory(new PropertyValueFactory<>("residentId"));
     dateOfActivity.setCellValueFactory(new PropertyValueFactory<>("date"));
     greenActivityResidentTable.setCellValueFactory(new PropertyValueFactory<>("activity"));
     pointsPerActivityResidentTable.setCellValueFactory(new PropertyValueFactory<>("pointsPerActivity"));
+
+    // Auto-numbering rows for resident activities table
     numberOfActivities.setCellFactory(col -> new TableCell<>() {
       @Override
       protected void updateItem(Number item, boolean empty) {
@@ -75,6 +99,7 @@ public class AddPointsController {
     });
     pointsResidentTable.setItems(residentActivities);
 
+    // Populate activity dropdown dynamically from activities list
     ObservableList<String> activityNames = FXCollections.observableArrayList();
     activitiesDropDown.setItems(activityNames);
     activities.addListener((ListChangeListener<Activity>) change -> {
@@ -82,6 +107,7 @@ public class AddPointsController {
       for (Activity a : activities) activityNames.add(a.getActivity());
     });
 
+    // Auto-fill points field when activity is selected
     activitiesDropDown.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
       if (newVal == null) pointsField.clear();
       else {
@@ -94,15 +120,18 @@ public class AddPointsController {
       }
     });
 
+    // Load data from JSON files
     loadCitizensFromJson();
     loadActivitiesFromJson();
     loadActualActivitiesFromJson();
     errorLabel.setVisible(false);
 
+    // Ensure points field only allows digits
     pointsField.textProperty().addListener((obs, oldVal, newVal) -> {
       if (!newVal.matches("\\d*")) pointsField.setText(newVal.replaceAll("\\D", ""));
     });
 
+    // Ensure citizen ID input only allows digits
     citizenIdDropDown.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
       if (!newVal.matches("\\d*")) citizenIdDropDown.getEditor().setText(newVal.replaceAll("\\D", ""));
     });
@@ -110,6 +139,9 @@ public class AddPointsController {
     setupSearchBars();
   }
 
+  /**
+   * Sets up filtering and sorting logic for both search bars.
+   */
   private void setupSearchBars() {
     FilteredList<Activity> filteredAvailable = new FilteredList<>(activities, p -> true);
     searchBarAvailablePoints.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -123,7 +155,8 @@ public class AddPointsController {
     FilteredList<Activity> filteredResident = new FilteredList<>(residentActivities, p -> true);
     searchBarGreenPoints.textProperty().addListener((obs, oldVal, newVal) -> {
       String filter = newVal.toLowerCase().trim();
-      filteredResident.setPredicate(a -> filter.isEmpty() || a.getActivity().toLowerCase().contains(filter)
+      filteredResident.setPredicate(a -> filter.isEmpty()
+          || a.getActivity().toLowerCase().contains(filter)
           || a.getResidentId().toLowerCase().contains(filter));
     });
     SortedList<Activity> sortedResident = new SortedList<>(filteredResident);
@@ -131,6 +164,9 @@ public class AddPointsController {
     pointsResidentTable.setItems(sortedResident);
   }
 
+  /**
+   * Loads citizen IDs from users.json into the dropdown.
+   */
   private void loadCitizensFromJson() {
     if (!usersFile.exists()) return;
     try {
@@ -142,6 +178,9 @@ public class AddPointsController {
     } catch (IOException e) { e.printStackTrace(); }
   }
 
+  /**
+   * Loads available activities from points.json.
+   */
   private void loadActivitiesFromJson() {
     if (!pointsFile.exists()) return;
     try {
@@ -151,6 +190,9 @@ public class AddPointsController {
     } catch (IOException e) { e.printStackTrace(); }
   }
 
+  /**
+   * Loads actual resident activities from actualPoints.json.
+   */
   private void loadActualActivitiesFromJson() {
     if (!actualPointsFile.exists()) return;
     try {
@@ -160,6 +202,9 @@ public class AddPointsController {
     } catch (Exception e) { e.printStackTrace(); }
   }
 
+  /**
+   * Resets all input fields.
+   */
   @FXML
   public void handleResetFields() {
     activitiesDropDown.setValue(null);
@@ -169,6 +214,9 @@ public class AddPointsController {
     errorLabel.setVisible(false);
   }
 
+  /**
+   * Adds points to a resident based on selected activity and input data.
+   */
   @FXML
   public void handleAddPointsButton() {
     errorLabel.setVisible(false);
@@ -191,12 +239,18 @@ public class AddPointsController {
     handleResetFields();
   }
 
+  /**
+   * Displays an error message.
+   */
   private void showError(String message) {
     errorLabel.setText(message);
     errorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-alignment: center;");
     errorLabel.setVisible(true);
   }
 
+  /**
+   * Exports available activities to points.json.
+   */
   @FXML
   public void handleExportButton() {
     try {
@@ -209,6 +263,9 @@ public class AddPointsController {
     } catch (IOException e) { e.printStackTrace(); }
   }
 
+  /**
+   * Exports resident activities to actualPoints.json.
+   */
   public void handleExportActualPointsButton() {
     try {
       ObjectMapper mapper = new ObjectMapper();
@@ -221,6 +278,9 @@ public class AddPointsController {
       System.out.println("Need to select something");; }
   }
 
+  /**
+   * Opens a window for adding a new green activity.
+   */
   @FXML
   public void handleAddButton() {
     try {
@@ -235,6 +295,9 @@ public class AddPointsController {
       System.out.println("Error");; }
   }
 
+  /**
+   * Deletes the selected available activity.
+   */
   public void handleDeleteActivity() {
     Activity selectedActivity = pointsTable.getSelectionModel().getSelectedItem();
     if (selectedActivity == null){
@@ -242,9 +305,12 @@ public class AddPointsController {
       errorLabel2.setText("You need to select a activity!");
       errorLabel2.setStyle("-fx-text-fill: red");
     }else{ activities.remove(selectedActivity);
-    errorLabel2.setVisible(false);}
+      errorLabel2.setVisible(false);}
   }
 
+  /**
+   * Opens a window to edit a selected resident activity.
+   */
   public void handleEditActivity() {
     Activity selectedResidentActivity = pointsResidentTable.getSelectionModel().getSelectedItem();
     if (selectedResidentActivity == null) {
@@ -266,6 +332,9 @@ public class AddPointsController {
       System.out.println("Normal Error");; }
   }
 
+  /**
+   * Deletes a selected resident activity.
+   */
   public void handleDeleteResidentActivity() {
     Activity selectedActivity = pointsResidentTable.getSelectionModel().getSelectedItem();
     if (selectedActivity == null){
@@ -274,8 +343,11 @@ public class AddPointsController {
       errorLabel1.setStyle("-fx-text-fill: red");
 
     } else{residentActivities.remove(selectedActivity);
-    errorLabel1.setVisible(false);}}
+      errorLabel1.setVisible(false);}}
 
+  /**
+   * Adds a new activity to the available activities list.
+   */
   public void addActivity(Activity activity) {
     activities.add(activity);
   }
